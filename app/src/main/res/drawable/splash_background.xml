@@ -3,9 +3,8 @@
 
     <item android:drawable="@color/windowBackgroundColor" />
 
-    <item>
-        <bitmap android:src="@drawable/ic_memo_pay"
-            android:gravity="center" />
-    </item>
+    <item
+        android:drawable="@drawable/ic_memo_pay"
+        android:gravity="center"/>
 
 </layer-list>
