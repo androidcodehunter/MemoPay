@@ -8,4 +8,4 @@
     android:paddingTop="@dimen/list_item_spacing_half"
     android:paddingBottom="@dimen/list_item_spacing_half"
     tools:context=".ui.home.TransactionHistoryModal"
-    tools:listitem="@layout/fragment_transaction_history_modal_list_dialog_item" />
+    tools:listitem="@layout/list_item_transaction_history" />

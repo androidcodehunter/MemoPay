@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.memo.pay.R
-import kotlinx.android.synthetic.main.fragment_transaction_history_modal_list_dialog.*
-import kotlinx.android.synthetic.main.fragment_transaction_history_modal_list_dialog_item.view.*
+import kotlinx.android.synthetic.main.fragment_transaction_history_modal.*
+import kotlinx.android.synthetic.main.list_item_transaction_history.view.*
 
 // TODO: Customize parameter argument names
 const val ARG_ITEM_COUNT = "item_count"
@@ -31,7 +31,7 @@ class TransactionHistoryModal : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(
-            R.layout.fragment_transaction_history_modal_list_dialog,
+            R.layout.fragment_transaction_history_modal,
             container,
             false
         )
@@ -47,7 +47,7 @@ class TransactionHistoryModal : BottomSheetDialogFragment() {
         parent: ViewGroup
     ) : RecyclerView.ViewHolder(
         inflater.inflate(
-            R.layout.fragment_transaction_history_modal_list_dialog_item,
+            R.layout.list_item_transaction_history,
             parent,
             false
         )
