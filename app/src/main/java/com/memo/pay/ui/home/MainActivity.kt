@@ -1,4 +1,4 @@
-package com.memo.pay.ui
+package com.memo.pay.ui.home
 
 import android.content.Context
 import android.content.Intent
