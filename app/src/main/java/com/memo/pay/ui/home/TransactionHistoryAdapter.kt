@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -69,7 +70,8 @@ class TransactionHistoryAdapter(val onTransactionItemClickListener: (transaction
 
     inner class ViewHolderDate(itemView: View): RecyclerView.ViewHolder(itemView){
         fun bind(date: String) {
-
+            val dateText = itemView as AppCompatTextView
+            dateText.text = date
         }
 
     }

@@ -11,16 +11,64 @@
     android:paddingRight="@dimen/list_item_spacing"
     android:paddingBottom="@dimen/list_item_spacing_half">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvTransactorName"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivProfilePic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sharifur"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_memo_pay"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/ivProfilePic"
+        app:layout_constraintRight_toRightOf="@id/ivProfilePic"
+        android:layout_marginLeft="@dimen/list_item_spacing"
+        app:srcCompat="@drawable/ic_add_money_white"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTransactorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Sharifur dfgdgdgdgdgf fffsfsfsffssfsfsf"
+        android:layout_marginTop="@dimen/list_item_spacing_half"
+        android:layout_marginLeft="@dimen/list_item_spacing"
+        android:textColor="@android:color/black"
+        android:lines="1"
+        android:ellipsize="end"
+        android:layout_marginRight="@dimen/list_item_spacing_half"
+        android:layout_marginEnd="@dimen/list_item_spacing_half"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/tvTransactionAmount"
+        app:layout_constraintLeft_toRightOf="@id/ivProfilePic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSendReceiveStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Sent"
+        android:layout_marginTop="@dimen/list_item_spacing_half"
+        android:textColor="@android:color/darker_gray"
+        android:lines="1"
+        android:layout_marginRight="@dimen/list_item_spacing_half"
+        android:layout_marginEnd="@dimen/list_item_spacing_half"
+        android:ellipsize="end"
+        app:layout_constraintLeft_toLeftOf="@id/tvTransactorName"
+        app:layout_constraintRight_toLeftOf="@id/tvTransactionAmount"
+        app:layout_constraintTop_toBottomOf="@id/tvTransactorName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTransactionAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="145.0"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

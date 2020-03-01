@@ -12,6 +12,10 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         val list = mutableListOf<Any>()
         list.add("12: 50")
         list.add(Transaction("1", "Sharifur", "sent", 10.00, "AED", "", Date()))
+        list.add(Transaction("2", "Sharifur", "sent", 10.00, "AED", "", Date()))
+        list.add(Transaction("3", "Sharifur", "sent", 10.00, "AED", "", Date()))
+        list.add("12: 50")
+        list.add(Transaction("4", "Sharifur", "sent", 10.00, "AED", "", Date()))
         return list
     }
 

@@ -32,6 +32,14 @@ class HomeFragment : Fragment() {
     }
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        tvAddMoney.setOnClickListener {  }
+        tvSendMoney.setOnClickListener {  }
+        tvMore.setOnClickListener {  }
+    }
+
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mTransactionAdapter = TransactionHistoryAdapter {  }
