@@ -19,14 +19,14 @@
         app:title="@string/memo_pay_balance">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="?actionBarSize"
-            android:layout_height="?actionBarSize"
+            android:layout_width="?listPreferredItemHeightSmall"
+            android:layout_height="?listPreferredItemHeightSmall"
             android:layout_gravity="end"
             android:background="@drawable/rounded_green"
             android:gravity="center"
             android:text="@string/letter_a"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/abc_text_size_display_1_material" />
+            android:textSize="@dimen/abc_text_size_headline_material" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -75,5 +75,17 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/tvSendMoney"
         app:layout_constraintTop_toTopOf="@id/tvAddMoney" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listTransactionHistory"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:layout_marginTop="@dimen/action_button_space"
+        app:layout_constraintTop_toBottomOf="@id/tvAddMoney"
+        android:background="@drawable/bg_top_rounded_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
