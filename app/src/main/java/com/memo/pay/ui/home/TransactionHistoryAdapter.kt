@@ -59,12 +59,8 @@ class TransactionHistoryAdapter(val onTransactionItemClickListener: (transaction
 
         fun bindTo(transaction: Transaction) {
             itemView.tvTransactorName.text = transaction.name
-          /*  if (!transaction.description.isNullOrEmpty()) {
-                itemView.tvRepoDescription.visibility = View.VISIBLE
-                itemView.tvRepoDescription.text = transaction.description
-            } else {
-                itemView.tvRepoDescription.visibility = View.GONE
-            }*/
+            itemView.tvSendReceiveStatus.text = transaction.type
+            itemView.tvTransactionAmount.text = "${transaction.currency} ${transaction.transactionAmount}"
         }
     }
 
