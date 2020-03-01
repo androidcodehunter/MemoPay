@@ -32,20 +32,18 @@ class TransactionHistoryAdapter(val onTransactionItemClickListener: (transaction
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
-        if (item is Transaction){
-            val transactionViewHolder = holder as ViewHolderTransaction
-            transactionViewHolder.bindTo(item)
+        if (holder is ViewHolderTransaction){
+            holder.bindTo(item as Transaction)
         }else{
-            val dateViewHolder = holder as ViewHolderDate
-            dateViewHolder.bind(item as String)
+            (holder as ViewHolderDate).bind(item as String)
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         val transactionItem = getItem(position)
         return if (transactionItem is String){
-            ITEM_TYPE_TRANSACTION
-        }else ITEM_TYPE_DATE
+            ITEM_TYPE_DATE
+        }else ITEM_TYPE_TRANSACTION
     }
 
     inner class ViewHolderTransaction(itemView: View) : RecyclerView.ViewHolder(itemView) {
