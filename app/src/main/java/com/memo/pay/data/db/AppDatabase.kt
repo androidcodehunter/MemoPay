@@ -5,6 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.memo.pay.data.db.dao.AccountDao
+import com.memo.pay.data.db.dao.TransactionDao
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
 
@@ -12,8 +14,8 @@ import com.memo.pay.data.db.table.Transaction
 @TypeConverters(DateTypeConverter::class)
 abstract class AppDatabase: RoomDatabase() {
 
-   // abstract fun userDao(): UserDao
-    //abstract fun repoDao(): RepoDao
+    abstract fun transactionDao(): TransactionDao
+    abstract fun accountDao(): AccountDao
 
     companion object{
         @Volatile private var instance: AppDatabase? = null

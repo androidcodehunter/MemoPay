@@ -1,8 +1,11 @@
 package com.memo.pay.data.db.table
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.util.*
 
-data class Transaction(val id: String,
+@Entity(tableName = "transactions")
+data class Transaction(@PrimaryKey val id: String,
                        val name: String,
                        val type: String,
                        val transactionAmount: Double,
