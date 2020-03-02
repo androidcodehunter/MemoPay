@@ -11,4 +11,6 @@ data class Transaction(@PrimaryKey val id: String,
                        val transactionAmount: Double,
                        val currency: String,
                        val profileUrl: String,
-                       val date: Date)
+                       val date: Date,
+                       val senderAccountNumber: String,
+                       val receiverAccountNumber: String)

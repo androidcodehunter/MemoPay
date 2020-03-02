@@ -26,19 +26,19 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
     }
 
 
-     suspend fun getAccount(forceUpdate: Boolean = false): Result<Account> {
+     suspend fun getAccount(forceUpdate: Boolean = false, accountNumber: String): Result<Account> {
         if (forceUpdate) {
             try {
-                updateAccountFromRemoteDataSource()
+                updateAccountFromRemoteDataSource(accountNumber)
             } catch (ex: Exception) {
                 return Result.Error(ex)
             }
         }
-        return accountLocalDataSource.getAccount("")
+        return accountLocalDataSource.getAccount(accountNumber)
     }
 
-    private suspend fun updateAccountFromRemoteDataSource() {
-        val remoteAccount = accountRemoteDataSource.getAccount("")
+    private suspend fun updateAccountFromRemoteDataSource(accountNumber: String) {
+        val remoteAccount = accountRemoteDataSource.getAccount(accountNumber)
 
         if (remoteAccount is Result.Success) {
             // Real apps might want to do a proper sync.
