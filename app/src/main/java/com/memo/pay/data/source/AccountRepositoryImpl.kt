@@ -5,9 +5,10 @@ import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
 
 class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSource,
-                            private val accountRemoteDataSource: AccountDataSource){
+                            private val accountRemoteDataSource: AccountDataSource) :
+    AccountRepository {
 
-    suspend fun getTransactionsHistory(forceUpdate: Boolean = false): Result<List<Transaction>> {
+    override suspend fun getTransactionsHistory(forceUpdate: Boolean): Result<List<Transaction>> {
         if (forceUpdate){
             updateTransactionsFromRemoteDataSource()
         }
@@ -26,7 +27,7 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
     }
 
 
-     suspend fun getAccount(forceUpdate: Boolean = false, accountNumber: String): Result<Account> {
+     override suspend fun getAccount(forceUpdate: Boolean, accountNumber: String): Result<Account> {
         if (forceUpdate) {
             try {
                 updateAccountFromRemoteDataSource(accountNumber)
