@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/section_img"
+            android:id="@+id/introBackgroundImage"
             android:layout_width="192dp"
             android:layout_height="192dp"
             android:layout_gravity="center"
@@ -46,7 +46,7 @@
             android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:alpha="0.7"
             android:gravity="center"
-            android:text="Add a long description here about your app's important feature."
+            android:text="Connect your bank account."
             android:textColor="@android:color/white" />
 
 

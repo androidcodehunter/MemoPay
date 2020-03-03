@@ -1,13 +1,14 @@
 package com.memo.pay.ui.onboarding
 
+import android.animation.ArgbEvaluator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.memo.pay.R
 import com.memo.pay.ui.home.MainActivity
@@ -26,8 +27,7 @@ class IntroActivity : AppCompatActivity() {
         indicators.add(intro_indicator_1)
         indicators.add(intro_indicator_2)
 
-         slidingAdapter = ScreenSlidePagerAdapter(this, mutableListOf("", "", ""))
-
+        slidingAdapter = ScreenSlidePagerAdapter(this, mutableListOf("", "", ""))
         introViewPager.adapter = slidingAdapter
         introViewPager.currentItem = currentPage
         updateIndicators(currentPage)
@@ -36,19 +36,20 @@ class IntroActivity : AppCompatActivity() {
 
     private fun initListeners() {
 
+        val color1 = ContextCompat.getColor(this, R.color.cyan)
+        val color2 = ContextCompat.getColor(this, R.color.orange)
+        val color3 = ContextCompat.getColor(this, R.color.green)
+        val evaluator = ArgbEvaluator()
+        val colorList = intArrayOf(color1, color2, color3)
+
         introViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
-
-                /*              /*
-                color update
-                 */
-                int colorUpdate = (Integer) evaluator.evaluate(positionOffset, colorList[position], colorList[position == 2 ? position : position + 1]);
-                mViewPager.setBackgroundColor(colorUpdate);*/
-
+                val colorUpdate = evaluator.evaluate(positionOffset, colorList[position], colorList[if (position == 2) position else position + 1]) as Int
+                introViewPager.setBackgroundColor(colorUpdate)
             }
 
             override fun onPageSelected(position: Int) {
@@ -56,13 +57,13 @@ class IntroActivity : AppCompatActivity() {
                 updateIndicators(position)
                 when (position) {
                     0 -> {
-                        //introViewPager.setBackgroundColor()
+                        introViewPager.setBackgroundColor(color1)
                     }
                     1 -> {
-                        //introViewPager.setBackgroundColor()
+                        introViewPager.setBackgroundColor(color2)
                     }
                     2 -> {
-                        // introViewPager.setBackgroundColor()
+                        introViewPager.setBackgroundColor(color3)
                     }
                 }
 
@@ -76,12 +77,19 @@ class IntroActivity : AppCompatActivity() {
             introViewPager.setCurrentItem(currentPage, true)
         }
 
-        intro_btn_skip.setOnClickListener { finish() }
+        intro_btn_skip.setOnClickListener {
+            startMainActivity()
+        }
 
         intro_btn_finish.setOnClickListener {
-            MainActivity.startMainActivity(this)
-            finish()
+            startMainActivity()
         }
+
+    }
+
+    private fun startMainActivity(){
+        MainActivity.startMainActivity(this)
+        finish()
     }
 
     private fun updateIndicators(position: Int) {
