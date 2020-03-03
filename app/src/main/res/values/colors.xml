@@ -6,4 +6,5 @@
     <color name="primaryTextColor">#000000</color>
     <color name="windowBackgroundColor">#3333FF</color>
     <color name="color_green">#8ACFC3</color>
+    <color name="indicator_unselected">#4D000000</color>
 </resources>

@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
     private fun launchOnboardingAfterOneSeconds() {
         CoroutineScope(Dispatchers.Main).launch {
             delay(DELAY_ONE_SECONDS)
-            MainActivity.startMainActivity(this@SplashActivity)
+            IntroActivity.startIntroActivity(this@SplashActivity)
             finish()
         }
     }
