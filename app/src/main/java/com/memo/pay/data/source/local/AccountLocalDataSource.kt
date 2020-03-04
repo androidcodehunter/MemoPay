@@ -25,7 +25,7 @@ class AccountLocalDataSource(private val appDatabase: AppDatabase,
 
     override suspend fun getAccount(accountNumber: String): Result<Account> = withContext(ioDispatcher){
         try {
-            val account = appDatabase.accountDao().getAccount()
+            val account = appDatabase.accountDao().getAccount(accountNumber)
             return@withContext Success(account)
         } catch (e: Exception) {
             return@withContext Error(e)
@@ -47,7 +47,7 @@ class AccountLocalDataSource(private val appDatabase: AppDatabase,
     override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> = withContext(ioDispatcher){
         appDatabase.accountDao().updateBalance(amount, accountNumber)
         try {
-            val account = appDatabase.accountDao().getAccount()
+            val account = appDatabase.accountDao().getAccount(accountNumber)
             return@withContext Success(account)
         } catch (e: Exception) {
             return@withContext Error(e)

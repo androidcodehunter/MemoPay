@@ -6,11 +6,11 @@ import com.memo.pay.data.db.table.Account
 @Dao
 interface AccountDao{
 
-    @Query("select * from account")
-    suspend fun getAccount(): Account
+    @Query("select * from account where accountNumber =:accountNumber")
+    suspend fun getAccount(accountNumber: String): Account
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveAccount(account: Account)
 
     @Transaction

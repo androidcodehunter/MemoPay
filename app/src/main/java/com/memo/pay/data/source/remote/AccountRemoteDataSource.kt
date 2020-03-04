@@ -7,13 +7,18 @@ import com.memo.pay.data.source.AccountDataSource
 import kotlinx.coroutines.delay
 import com.memo.pay.data.Result.Error
 import com.memo.pay.data.Result.Success
+import com.memo.pay.data.db.AppDatabase
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.collections.LinkedHashMap
 
 /*TODO fake api calling delay time in millis. */
 private const val SERVICE_LATENCY_IN_MILLIS = 2000L
 
-class AccountRemoteDataSource: AccountDataSource {
+class AccountRemoteDataSource(private val appDatabase: AppDatabase,
+                              private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AccountDataSource {
 
     private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<String, Transaction>(2)
     private var ACCOUNT_SERVICE_DATA = LinkedHashMap<String, Account>(2)
@@ -65,12 +70,14 @@ class AccountRemoteDataSource: AccountDataSource {
 
     }
 
-    override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> {
+    override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> = withContext(ioDispatcher){
+        delay(SERVICE_LATENCY_IN_MILLIS)
+        val account = appDatabase.accountDao().getAccount(accountNumber)
         ACCOUNT_SERVICE_DATA[accountNumber]?.apply {
-            balance += amount
-            return Success(this)
+            balance = account.balance + amount
+            return@withContext Success(this)
         }
-        return Error(Exception("Add money is not possible"))
+        return@withContext Error(Exception("Add money is not possible"))
     }
 
 

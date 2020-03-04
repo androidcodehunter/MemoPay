@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     factory { AccountLocalDataSource(get()) }
-    factory { AccountRemoteDataSource() }
+    factory { AccountRemoteDataSource(AppDatabase(androidContext())) }
     factory { AppDatabase(androidContext()) }
     factory {
         AccountRepositoryImpl(

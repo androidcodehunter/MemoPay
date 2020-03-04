@@ -11,10 +11,10 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
-
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
+import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_money.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -59,8 +59,23 @@ class AddMoneyFragment : Fragment() {
        }
     }
 
+    private val addMoneyObserver = androidx.lifecycle.Observer<Result<Account>>{ result ->
+        when (result) {
+            is Result.Loading -> {
+                showProgressLoading()
+            }
+            is Result.Success -> {
+                hideProgressLoading()
+                showAccount(result.data)
+            }
+            is Result.Error -> {
+                hideProgressLoading()
+            }
+        }
+    }
+
     private fun addMoney(amount: Double, accountNumber: String) {
-        homeViewModel.addMoney(amount, accountNumber).observe(viewLifecycleOwner, accountObserver)
+        homeViewModel.addMoney(amount, accountNumber).observe(viewLifecycleOwner, addMoneyObserver)
     }
 
     override fun onCreateView(
@@ -87,14 +102,14 @@ class AddMoneyFragment : Fragment() {
                 BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ContextCompat.getColor(mainActivity, R.color.darker_gray), BlendModeCompat.SRC_ATOP)
         }
 
-        homeViewModel.getAccount(true, "1111111111").observe(viewLifecycleOwner, accountObserver)
+        homeViewModel.getAccount(true, CURRENT_ACCOUNT_NUMBER).observe(viewLifecycleOwner, accountObserver)
         homeViewModel.getAmount().observe(viewLifecycleOwner, amountObserver)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         btnTopUP.setOnClickListener {
-            homeViewModel.setAmount(etEnterAmount.text.toString(), "1111111111")
+            homeViewModel.setAmount(etEnterAmount.text.toString(), CURRENT_ACCOUNT_NUMBER)
         }
     }
 

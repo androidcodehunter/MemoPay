@@ -14,6 +14,7 @@ import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
+import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -108,8 +109,8 @@ class HomeFragment : Fragment() {
             hasFixedSize()
             adapter = mTransactionAdapter
         }
-        homeViewModel.getTransactions(true, "1111111111").observe(viewLifecycleOwner, transactionsObserver)
-        homeViewModel.getAccount(true, "1111111112").observe(viewLifecycleOwner, accountObserver)
+        homeViewModel.getTransactions(true, CURRENT_ACCOUNT_NUMBER).observe(viewLifecycleOwner, transactionsObserver)
+        homeViewModel.getAccount(true, CURRENT_ACCOUNT_NUMBER).observe(viewLifecycleOwner, accountObserver)
     }
 
     companion object {
