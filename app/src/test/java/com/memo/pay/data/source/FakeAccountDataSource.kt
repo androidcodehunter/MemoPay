@@ -26,7 +26,7 @@ class FakeAccountDataSource(var transactions: MutableList<Transaction>? = mutabl
         transactions?.add(transaction)
     }
 
-    override suspend fun getTransactionsHistory(): Result<List<Transaction>> {
+    override suspend fun getTransactionsHistory(accountNumber: String): Result<List<Transaction>> {
         transactions?.let { return Result.Success(it.toList()) }
         return Error(Exception("Tasks not found"))
     }

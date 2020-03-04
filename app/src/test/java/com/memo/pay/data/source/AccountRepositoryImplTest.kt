@@ -35,7 +35,7 @@ class AccountRepositoryImplTest {
 
     @Test
     fun getTransactions_requestAllTransactionFromRemoteDataSource() = runBlockingTest{
-        val transactions = accountRepository.getTransactionsHistory() as Result.Success
+        val transactions = accountRepository.getTransactionsHistory(true, "11111111") as Result.Success
         Assert.assertThat(transactions.data, IsEqual(remoteTransactions))
     }
 

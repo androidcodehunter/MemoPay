@@ -9,7 +9,7 @@ class FakeTestAccountRepository : AccountRepository {
 
     var transactionsServiceData: LinkedHashMap<String, Transaction> = LinkedHashMap()
 
-    override suspend fun getTransactionsHistory(forceUpdate: Boolean): Result<List<Transaction>> {
+    override suspend fun getTransactionsHistory(forceUpdate: Boolean, accountNumber: String): Result<List<Transaction>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
