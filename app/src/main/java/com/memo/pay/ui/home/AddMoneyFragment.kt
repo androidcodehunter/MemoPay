@@ -1,6 +1,14 @@
 package com.memo.pay.ui.home
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.media.RingtoneManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.SyncStateContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +16,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
@@ -67,6 +76,7 @@ class AddMoneyFragment : Fragment() {
             is Result.Success -> {
                 hideProgressLoading()
                 showAccount(result.data)
+                showNotification()
             }
             is Result.Error -> {
                 hideProgressLoading()
@@ -111,6 +121,42 @@ class AddMoneyFragment : Fragment() {
         btnTopUP.setOnClickListener {
             homeViewModel.setAmount(etEnterAmount.text.toString(), CURRENT_ACCOUNT_NUMBER)
         }
+    }
+
+
+    private fun showNotification() {
+       /* val intent = Intent(context, TodayWordActivity::class.java)
+        intent.putExtra(SyncStateContract.Constants.WORD_ID, todayWord)
+        // Set the Activity to start in a new, empty task
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        val pendingIntent = PendingIntent.getActivity(
+            context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val channelId = context.getString(R.string.default_notification_channel_id)
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        val notificationBuilder = NotificationCompat.Builder(context, channelId)
+        notificationBuilder.color = ContextCompat.getColor(context, R.color.colorPrimary)
+        notificationBuilder.setSmallIcon(R.drawable.ic_notification)
+        notificationBuilder.setContentTitle(context.getString(R.string.fcm_message) + ": " + todayWord)
+        notificationBuilder.setContentText(context.getString(R.string.tap_to_see_mnemonic))
+        notificationBuilder.setAutoCancel(true)
+        notificationBuilder.setSound(defaultSoundUri)
+        notificationBuilder.setContentIntent(pendingIntent)
+        notificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
+        notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
+
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        // Since android Oreo notification channel is needed.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(channelId,
+                context.getString(R.string.fcm_message),
+                NotificationManager.IMPORTANCE_DEFAULT)
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())*/
     }
 
     companion object {
