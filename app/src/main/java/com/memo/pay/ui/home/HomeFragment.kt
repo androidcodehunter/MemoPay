@@ -1,21 +1,26 @@
 package com.memo.pay.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.memo.pay.R
+import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
+import com.memo.pay.data.db.table.Transaction
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.memo.pay.data.Result
-import com.memo.pay.data.db.table.Transaction
 
 class HomeFragment : Fragment() {
 
+    private lateinit var mNavController: NavController
     private lateinit var mTransactionAdapter:TransactionHistoryAdapter
 
     private val homeViewModel: HomeViewModel by viewModel()
@@ -42,11 +47,15 @@ class HomeFragment : Fragment() {
 
     private fun hideProgressLoading() {
         progressLoadingLayout.visibility = GONE
-
+        (activity as MainActivity).toolbar_main?.apply {
+            visibility = VISIBLE
+            findViewById<AppCompatTextView>(R.id.tvAccountIcon).visibility = VISIBLE
+        }
     }
 
     private fun showProgressLoading() {
         progressLoadingLayout.visibility = VISIBLE
+        (activity as MainActivity).toolbar_main.visibility = GONE
     }
 
     private val transactionsObserver = androidx.lifecycle.Observer<Result<List<Transaction>>>{ result ->
@@ -83,7 +92,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvAddMoney.setOnClickListener {  }
+        mNavController = Navigation.findNavController(view)
+        tvAddMoney.setOnClickListener {
+            mNavController.navigate(R.id.action_homeFragment_to_AddMoneyFragment)
+        }
         tvSendMoney.setOnClickListener {  }
         tvMore.setOnClickListener {  }
     }

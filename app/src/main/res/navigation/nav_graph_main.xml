@@ -9,6 +9,15 @@
         android:name="com.memo.pay.ui.home.HomeFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_homeFragment_to_AddMoneyFragment"
+            app:destination="@id/addMoneyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
      <!--   <action
             android:id="@+id/action_roomFragment_to_roomDetailsFragment"
             app:destination="@id/roomDetailsFragment"
@@ -35,11 +44,11 @@
             app:popExitAnim="@anim/slide_out_right" />-->
     </fragment>
 
- <!--   <fragment
-        android:id="@+id/roomDetailsFragment"
-        android:name="com.dynatech.insidecontrol.ui.detail.RoomDetailsFragment"
+    <fragment
+        android:id="@+id/addMoneyFragment"
+        android:name="com.memo.pay.ui.home.AddMoneyFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_device_details" />-->
+        tools:layout="@layout/fragment_add_money" />
 
 <!--
 

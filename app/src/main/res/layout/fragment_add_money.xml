@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.AddMoneyFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAddMoneyTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/memo_pay_balance"
+        android:textColor="@color/primaryTextColor"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAccountBalance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/abc_text_size_subhead_material"
+        android:textColor="@color/primaryTextColor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        app:layout_constraintLeft_toLeftOf="@id/tvAddMoneyTitle"
+        app:layout_constraintRight_toRightOf="@id/tvAddMoneyTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvAddMoneyTitle"/>
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etEnterAmount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintLeft_toLeftOf="@id/tvAddMoneyTitle"
+        app:layout_constraintRight_toRightOf="@id/tvAddMoneyTitle"
+        android:minHeight="?android:listPreferredItemHeightLarge"
+        android:hint="@string/enter_amount"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintTop_toBottomOf="@id/tvAccountBalance"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTopUP"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintTop_toBottomOf="@id/etEnterAmount"
+        android:background="?selectableItemBackground"
+        android:text="@string/top_up_wallet"/>
+
+
+    <FrameLayout
+        android:id="@+id/progressbarAddMoney"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:background="@color/windowBackgroundColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

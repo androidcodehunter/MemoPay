@@ -99,4 +99,7 @@
     <string name="add_money">Add money</string>
     <string name="send_money">Send money</string>
     <string name="more">More</string>
+    <string name="enter_amount">Enter amount</string>
+    <string name="top_up_wallet">Top-up wallet</string>
+    <string name="amount_should_not_empty">Amount should not be empty.</string>
 </resources>

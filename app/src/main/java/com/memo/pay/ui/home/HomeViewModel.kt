@@ -1,15 +1,14 @@
 package com.memo.pay.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
+import androidx.core.text.isDigitsOnly
+import androidx.lifecycle.*
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
 import com.memo.pay.data.source.AccountRepository
 
 class HomeViewModel(private val accountRepository: AccountRepository): ViewModel() {
+    private var amountLiveData = MutableLiveData<String>()
 
     fun getTransactions(forceReload: Boolean, accountNumber: String): LiveData<Result<List<Transaction>>> {
        return liveData {
@@ -35,6 +34,15 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
             }
         }
     }
+
+    fun setAmount(amount: String){
+         if (amount.isDigitsOnly() && amount.isNotEmpty()){
+             amountLiveData.value = amount
+        }else amountLiveData.value = ""
+
+    }
+
+    fun getAmount() = amountLiveData
 
     @Suppress("UNCHECKED_CAST")
     class HomeViewModelFactory(private val accountRepository: AccountRepository) :
