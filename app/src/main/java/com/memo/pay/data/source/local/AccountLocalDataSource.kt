@@ -15,23 +15,18 @@ import com.memo.pay.data.Result.Success
 class AccountLocalDataSource(private val appDatabase: AppDatabase,
                              private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AccountDataSource {
 
-    override suspend fun getTransactionsHistory(): Result<List<Transaction>> = withContext(ioDispatcher){
+    override suspend fun getTransactionsHistory(accountNumber: String): Result<List<Transaction>> = withContext(ioDispatcher){
         return@withContext try {
-            Success(appDatabase.transactionDao().getTransactions())
+            Success(appDatabase.transactionDao().getTransactions(accountNumber))
         } catch (e: Exception) {
             Error(e)
         }
     }
 
-
     override suspend fun getAccount(accountNumber: String): Result<Account> = withContext(ioDispatcher){
         try {
             val account = appDatabase.accountDao().getAccount()
-            if (account != null) {
-                return@withContext Success(account)
-            } else {
-                return@withContext Error(Exception("Account not found!"))
-            }
+            return@withContext Success(account)
         } catch (e: Exception) {
             return@withContext Error(e)
         }

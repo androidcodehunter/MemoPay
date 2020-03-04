@@ -1,24 +1,39 @@
 package com.memo.pay.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.liveData
+import com.memo.pay.data.Result
+import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
-import com.memo.pay.data.source.AccountDataSource
 import com.memo.pay.data.source.AccountRepository
-import com.memo.pay.data.source.AccountRepositoryImpl
-import java.util.*
 
 class HomeViewModel(private val accountRepository: AccountRepository): ViewModel() {
 
-    fun getTransactions(): MutableList<Any> {
-        val list = mutableListOf<Any>()
-        list.add("12: 50")
-        list.add(Transaction("1", "Sharifur", "sent", 10.00, "AED", "", Date(), "", ""))
-        list.add(Transaction("2", "Sharifur", "sent", 10.00, "AED", "", Date(), "", ""))
-        list.add(Transaction("3", "Sharifur", "sent", 10.00, "AED", "", Date(), "", ""))
-        list.add("12: 50")
-        list.add(Transaction("4", "Sharifur", "sent", 10.00, "AED", "", Date(), "", ""))
-        return list
+    fun getTransactions(forceReload: Boolean, accountNumber: String): LiveData<Result<List<Transaction>>> {
+       return liveData {
+           emit(Result.Loading)
+            val transactionResult = accountRepository.getTransactionsHistory(true, accountNumber)
+           if (transactionResult is Result.Success){
+               emit(Result.Success(transactionResult.data))
+           }else if (transactionResult is Result.Error){
+               emit(Result.Error(transactionResult.exception))
+           }
+        }
+    }
+
+
+    fun getAccount(forceReload: Boolean, accountNumber: String): LiveData<Result<Account>> {
+        return liveData {
+            emit(Result.Loading)
+            val accountResult = accountRepository.getAccount(forceReload, accountNumber)
+            if (accountResult is Result.Success){
+                emit(Result.Success(accountResult.data))
+            }else if (accountResult is Result.Error){
+                emit(Result.Error(accountResult.exception))
+            }
+        }
     }
 
     @Suppress("UNCHECKED_CAST")

@@ -8,24 +8,21 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
                             private val accountRemoteDataSource: AccountDataSource) :
     AccountRepository {
 
-    override suspend fun getTransactionsHistory(forceUpdate: Boolean): Result<List<Transaction>> {
+    override suspend fun getTransactionsHistory(forceUpdate: Boolean, accountNumber: String): Result<List<Transaction>> {
         if (forceUpdate){
-            updateTransactionsFromRemoteDataSource()
+            updateTransactionsFromRemoteDataSource(accountNumber)
         }
-        return accountLocalDataSource.getTransactionsHistory()
+        return accountLocalDataSource.getTransactionsHistory(accountNumber)
     }
 
-    private suspend fun updateTransactionsFromRemoteDataSource() {
-        val remoteTransactions = accountRemoteDataSource.getTransactionsHistory()
-
+    private suspend fun updateTransactionsFromRemoteDataSource(accountNumber: String) {
+        val remoteTransactions = accountRemoteDataSource.getTransactionsHistory(accountNumber)
         if (remoteTransactions is Result.Success) {
-            // Real apps might want to do a proper sync.
-            //accountLocalDataSource.saveTransactions(remoteTransactions.data)
+            accountLocalDataSource.saveTransactions(remoteTransactions.data)
         } else if (remoteTransactions is Result.Error) {
             throw remoteTransactions.exception
         }
     }
-
 
      override suspend fun getAccount(forceUpdate: Boolean, accountNumber: String): Result<Account> {
         if (forceUpdate) {
@@ -40,10 +37,8 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
 
     private suspend fun updateAccountFromRemoteDataSource(accountNumber: String) {
         val remoteAccount = accountRemoteDataSource.getAccount(accountNumber)
-
         if (remoteAccount is Result.Success) {
-            // Real apps might want to do a proper sync.
-           /// accountLocalDataSource.saveAccount()
+           accountLocalDataSource.saveAccount(remoteAccount.data)
         } else if (remoteAccount is Result.Error) {
             throw remoteAccount.exception
         }
