@@ -51,15 +51,14 @@ class AddMoneyFragment : Fragment() {
         progressbarAddMoney.visibility = VISIBLE
     }
 
-    private val amountObserver = androidx.lifecycle.Observer<String>{ amount ->
-       if (amount.isEmpty()){
+    private val amountObserver = androidx.lifecycle.Observer<Pair<Double, String>>{ pair ->
+       if (pair.second.isEmpty()){
            etEnterAmount.error = getString(R.string.amount_should_not_empty)
        }else{
            showProgressLoading()
-           ///homeViewModel.addAmount(amount, accountNumber)
+           homeViewModel.addMoney(pair.first, pair.second)
        }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,7 +91,7 @@ class AddMoneyFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         btnTopUP.setOnClickListener {
-            homeViewModel.setAmount(etEnterAmount.text.toString())
+            homeViewModel.setAmount(etEnterAmount.text.toString(), "1111111111")
         }
     }
 

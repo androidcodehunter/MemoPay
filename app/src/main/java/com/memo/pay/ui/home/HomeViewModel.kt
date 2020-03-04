@@ -8,7 +8,7 @@ import com.memo.pay.data.db.table.Transaction
 import com.memo.pay.data.source.AccountRepository
 
 class HomeViewModel(private val accountRepository: AccountRepository): ViewModel() {
-    private var amountLiveData = MutableLiveData<String>()
+    private var amountLiveData = MutableLiveData<Pair<Double, String>>()
 
     fun getTransactions(forceReload: Boolean, accountNumber: String): LiveData<Result<List<Transaction>>> {
        return liveData {
@@ -35,14 +35,25 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         }
     }
 
-    fun setAmount(amount: String){
+    fun setAmount(amount: String, accountNumber: String){
          if (amount.isDigitsOnly() && amount.isNotEmpty()){
-             amountLiveData.value = amount
-        }else amountLiveData.value = ""
-
+             amountLiveData.value = Pair(amount.toDouble(), accountNumber)
+        }else amountLiveData.value = Pair(0.0, "")
     }
 
     fun getAmount() = amountLiveData
+
+    fun addMoney(amount: Double, accountNumber: String): LiveData<Result<Account>> {
+        return liveData {
+            emit(Result.Loading)
+            val accountResult = accountRepository.addMoney(amount, accountNumber)
+            if (accountResult is Result.Success){
+                emit(Result.Success(accountResult.data))
+            }else if (accountResult is Result.Error){
+                emit(Result.Error(accountResult.exception))
+            }
+        }
+    }
 
     @Suppress("UNCHECKED_CAST")
     class HomeViewModelFactory(private val accountRepository: AccountRepository) :

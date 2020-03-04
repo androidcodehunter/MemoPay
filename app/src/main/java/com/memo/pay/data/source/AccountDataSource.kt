@@ -10,4 +10,5 @@ interface AccountDataSource {
     suspend fun saveAccount(account: Account)
     suspend fun saveTransaction(transaction: Transaction)
     suspend fun saveTransactions(transactions: List<Transaction>)
+    suspend fun addMoney(amount: Double, accountNumber: String): Result<Account>
 }

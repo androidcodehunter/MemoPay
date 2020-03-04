@@ -5,8 +5,8 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Account(@PrimaryKey val accountNumber: String,
-                   val name: String,
-                   val balance: Double,
-                   val currency: String){
+                   var name: String,
+                   var balance: Double,
+                   var currency: String){
     fun getBalanceWithCurrency() = "$currency $balance"
 }

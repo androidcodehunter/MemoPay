@@ -12,4 +12,8 @@ interface AccountDao{
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAccount(account: Account)
+
+    @Transaction
+    @Query("UPDATE account SET balance =:newBalance WHERE accountNumber =:accountNumber")
+    suspend fun updateBalance(newBalance: Double, accountNumber: String)
 }

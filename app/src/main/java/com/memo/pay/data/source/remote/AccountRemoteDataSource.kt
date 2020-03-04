@@ -65,4 +65,13 @@ class AccountRemoteDataSource: AccountDataSource {
 
     }
 
+    override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> {
+        ACCOUNT_SERVICE_DATA[accountNumber]?.apply {
+            balance += amount
+            return Success(this)
+        }
+        return Error(Exception("Add money is not possible"))
+    }
+
+
 }

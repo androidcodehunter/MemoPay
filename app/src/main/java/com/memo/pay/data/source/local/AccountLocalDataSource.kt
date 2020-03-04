@@ -44,4 +44,15 @@ class AccountLocalDataSource(private val appDatabase: AppDatabase,
         appDatabase.transactionDao().saveTransactions(transactions)
     }
 
+    override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> = withContext(ioDispatcher){
+        appDatabase.accountDao().updateBalance(amount, accountNumber)
+        try {
+            val account = appDatabase.accountDao().getAccount()
+            return@withContext Success(account)
+        } catch (e: Exception) {
+            return@withContext Error(e)
+        }
+    }
+
+
 }

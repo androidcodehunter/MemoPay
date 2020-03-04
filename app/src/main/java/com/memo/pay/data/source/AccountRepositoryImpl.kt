@@ -35,6 +35,14 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
         return accountLocalDataSource.getAccount(accountNumber)
     }
 
+    override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> {
+        val addMoneyResponse = accountRemoteDataSource.addMoney(amount, accountNumber)
+        if (addMoneyResponse is Result.Success){
+            accountLocalDataSource.addMoney(addMoneyResponse.data.balance, addMoneyResponse.data.accountNumber)
+        }
+        return accountLocalDataSource.getAccount(accountNumber)
+    }
+
     private suspend fun updateAccountFromRemoteDataSource(accountNumber: String) {
         val remoteAccount = accountRemoteDataSource.getAccount(accountNumber)
         if (remoteAccount is Result.Success) {
