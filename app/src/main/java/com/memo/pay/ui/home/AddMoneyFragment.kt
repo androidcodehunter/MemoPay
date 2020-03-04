@@ -18,7 +18,6 @@ import com.memo.pay.data.db.table.Account
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_money.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 
 class AddMoneyFragment : Fragment() {
@@ -56,8 +55,12 @@ class AddMoneyFragment : Fragment() {
            etEnterAmount.error = getString(R.string.amount_should_not_empty)
        }else{
            showProgressLoading()
-           homeViewModel.addMoney(pair.first, pair.second)
+           addMoney(pair.first, pair.second)
        }
+    }
+
+    private fun addMoney(amount: Double, accountNumber: String) {
+        homeViewModel.addMoney(amount, accountNumber).observe(viewLifecycleOwner, accountObserver)
     }
 
     override fun onCreateView(

@@ -19,13 +19,13 @@
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_launcher_background"/>
 
-    <androidx.appcompat.widget.AppCompatImageView
+<!--    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/ivProfilePic"
         app:layout_constraintRight_toRightOf="@id/ivProfilePic"
         android:layout_marginLeft="@dimen/list_item_spacing"
-        app:srcCompat="@drawable/ic_add_money_white"/>
+        app:srcCompat="@drawable/ic_add_money_white"/>-->
 
 
     <androidx.appcompat.widget.AppCompatTextView
