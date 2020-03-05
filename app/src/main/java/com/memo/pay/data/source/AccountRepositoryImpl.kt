@@ -35,10 +35,13 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
         return accountLocalDataSource.getAccount(accountNumber)
     }
 
+    /*TODO add money to local data source and get the updated account response in the channel*/
     override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> {
         val addMoneyResponse = accountRemoteDataSource.addMoney(amount, accountNumber)
         if (addMoneyResponse is Result.Success){
             accountLocalDataSource.addMoney(addMoneyResponse.data.balance, addMoneyResponse.data.accountNumber)
+        }else if (addMoneyResponse is Result.Error){
+            throw addMoneyResponse.exception
         }
         return accountLocalDataSource.getAccount(accountNumber)
     }

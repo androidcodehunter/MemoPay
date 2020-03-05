@@ -97,7 +97,9 @@ class HomeFragment : Fragment() {
         tvAddMoney.setOnClickListener {
             mNavController.navigate(R.id.action_homeFragment_to_AddMoneyFragment)
         }
-        tvSendMoney.setOnClickListener {  }
+        tvSendMoney.setOnClickListener {
+            mNavController.navigate(R.id.action_homeFragment_to_sendMoneyFragment)
+        }
         tvMore.setOnClickListener {  }
     }
 

@@ -70,6 +70,7 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
 
     }
 
+    /*TODO fake add money here the user’s balance automatically incremented by provided AED. This will be replaced by real api call*/
     override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> = withContext(ioDispatcher){
         delay(SERVICE_LATENCY_IN_MILLIS)
         val account = appDatabase.accountDao().getAccount(accountNumber)

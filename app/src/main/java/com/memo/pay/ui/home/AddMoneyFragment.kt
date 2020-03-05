@@ -1,14 +1,6 @@
 package com.memo.pay.ui.home
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.media.RingtoneManager
-import android.os.Build
 import android.os.Bundle
-import android.provider.SyncStateContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +8,13 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
+import com.memo.pay.extensions.hideKeyboard
 import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_money.*
@@ -63,6 +55,7 @@ class AddMoneyFragment : Fragment() {
        if (pair.second.isEmpty()){
            etEnterAmount.error = getString(R.string.amount_should_not_empty)
        }else{
+           hideKeyboard()
            showProgressLoading()
            addMoney(pair.first, pair.second)
        }
@@ -76,7 +69,7 @@ class AddMoneyFragment : Fragment() {
             is Result.Success -> {
                 hideProgressLoading()
                 showAccount(result.data)
-                showNotification()
+                showAddMoneyNotification()
             }
             is Result.Error -> {
                 hideProgressLoading()
@@ -124,7 +117,7 @@ class AddMoneyFragment : Fragment() {
     }
 
 
-    private fun showNotification() {
+    private fun showAddMoneyNotification() {
        /* val intent = Intent(context, TodayWordActivity::class.java)
         intent.putExtra(SyncStateContract.Constants.WORD_ID, todayWord)
         // Set the Activity to start in a new, empty task

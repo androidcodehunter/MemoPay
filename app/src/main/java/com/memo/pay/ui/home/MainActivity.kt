@@ -35,6 +35,8 @@ class MainActivity : BaseActivity(){
                 setTitleTextColor(ContextCompat.getColor(this@MainActivity, R.color.colorPrimary))
             }
             navController.navigateUp()
+        }else{
+            navController.navigateUp()
         }
 
         return super.onOptionsItemSelected(item)
