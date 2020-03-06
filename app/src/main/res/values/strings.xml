@@ -102,4 +102,6 @@
     <string name="enter_amount">Enter amount</string>
     <string name="top_up_wallet">Top-up wallet</string>
     <string name="amount_should_not_empty">Amount should not be empty.</string>
+    <string name="next">Next</string>
+    <string name="search_by_name_phone_or_email">Search by name, phone or email</string>
 </resources>

@@ -9,27 +9,20 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvAddMoneyTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/TextBalanceTitle"
         android:text="@string/memo_pay_balance"
-        android:textColor="@color/primaryTextColor"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvAccountBalance"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/abc_text_size_subhead_material"
-        android:textColor="@color/primaryTextColor"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        style="@style/TextBalanceAmount"
         app:layout_constraintLeft_toLeftOf="@id/tvAddMoneyTitle"
         app:layout_constraintRight_toRightOf="@id/tvAddMoneyTitle"
         app:layout_constraintTop_toBottomOf="@id/tvAddMoneyTitle"/>
-
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/etEnterAmount"
