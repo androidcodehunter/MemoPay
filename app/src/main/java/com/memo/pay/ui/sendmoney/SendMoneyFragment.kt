@@ -1,4 +1,4 @@
-package com.memo.pay.ui.home
+package com.memo.pay.ui.sendmoney
 
 import android.os.Bundle
 import android.view.LayoutInflater

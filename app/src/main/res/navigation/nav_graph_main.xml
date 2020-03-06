@@ -46,13 +46,13 @@
 
     <fragment
         android:id="@+id/addMoneyFragment"
-        android:name="com.memo.pay.ui.home.AddMoneyFragment"
+        android:name="com.memo.pay.ui.addmoney.AddMoneyFragment"
         android:label="@string/enter_amount"
         tools:layout="@layout/fragment_add_money" />
 
     <fragment
         android:id="@+id/sendMoneyFragment"
-        android:name="com.memo.pay.ui.home.SendMoneyFragment"
+        android:name="com.memo.pay.ui.sendmoney.SendMoneyFragment"
         android:label="@string/send_money" />
 
 </navigation>

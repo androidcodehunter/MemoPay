@@ -1,4 +1,4 @@
-package com.memo.pay.ui.home
+package com.memo.pay.ui.addmoney
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -15,6 +15,8 @@ import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.extensions.hideKeyboard
+import com.memo.pay.ui.home.HomeViewModel
+import com.memo.pay.ui.home.MainActivity
 import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_money.*

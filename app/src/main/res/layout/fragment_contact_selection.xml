@@ -59,7 +59,7 @@
         android:layout_marginTop="@dimen/list_item_spacing_half"
         android:textAllCaps="false"
         android:text="@string/send_via_tap"/>
-    
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/listContact"
         android:layout_width="match_parent"
