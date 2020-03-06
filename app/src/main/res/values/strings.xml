@@ -104,4 +104,8 @@
     <string name="amount_should_not_empty">Amount should not be empty.</string>
     <string name="next">Next</string>
     <string name="search_by_name_phone_or_email">Search by name, phone or email</string>
+    <string name="frequent">Frequent</string>
+    <string name="you_can_also_send_money_by">You can also send money by</string>
+    <string name="share_a_magic_link">Share a magic link</string>
+    <string name="send_via_tap">Send via tap</string>
 </resources>
