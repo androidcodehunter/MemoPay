@@ -35,7 +35,7 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
         return accountLocalDataSource.getAccount(accountNumber)
     }
 
-    /*TODO add money to local data source and get the updated account response in the channel*/
+    /*TODO add money to local data source and get the updated account response in the channel upward*/
     override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> {
         val addMoneyResponse = accountRemoteDataSource.addMoney(amount, accountNumber)
         if (addMoneyResponse is Result.Success){
@@ -54,5 +54,10 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
             throw remoteAccount.exception
         }
     }
+
+    override suspend fun getFrequentContacts(): Result<List<Account>> = accountRemoteDataSource.getFrequentContacts()
+
+    override suspend fun getContacts(): Result<List<Account>> = accountRemoteDataSource.getContacts()
+
 
 }

@@ -54,5 +54,13 @@ class AccountLocalDataSource(private val appDatabase: AppDatabase,
         }
     }
 
+    override suspend fun getFrequentContacts(): Result<List<Account>> {
+        return Error(Exception())
+    }
+
+    override suspend fun getContacts(): Result<List<Account>> {
+        return Error(Exception())
+    }
+
 
 }

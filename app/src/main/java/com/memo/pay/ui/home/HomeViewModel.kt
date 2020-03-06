@@ -70,6 +70,31 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         }
     }
 
+    fun getFrequentContacts(): LiveData<Result<List<Account>>> {
+        return liveData {
+            emit(Result.Loading)
+            val frequentContactResponse = accountRepository.getFrequentContacts()
+            if (frequentContactResponse is Result.Success){
+                emit(Result.Success(frequentContactResponse.data))
+            }else if (frequentContactResponse is Result.Error){
+                emit(Result.Error(frequentContactResponse.exception))
+            }
+        }
+    }
+
+    fun getContacts(): LiveData<Result<List<Account>>> {
+        return liveData {
+            emit(Result.Loading)
+            val contactResponse = accountRepository.getContacts()
+            if (contactResponse is Result.Success){
+                emit(Result.Success(contactResponse.data))
+            }else if (contactResponse is Result.Error){
+                emit(Result.Error(contactResponse.exception))
+            }
+        }
+    }
+
+
     @Suppress("UNCHECKED_CAST")
     class HomeViewModelFactory(private val accountRepository: AccountRepository) :
         ViewModelProvider.NewInstanceFactory() {

@@ -8,4 +8,6 @@ interface AccountRepository {
     suspend fun getTransactionsHistory(forceUpdate: Boolean = false, accountNumber: String): Result<List<Transaction>>
     suspend fun getAccount(forceUpdate: Boolean = false, accountNumber: String): Result<Account>
     suspend fun addMoney(amount: Double, accountNumber: String): Result<Account>
+    suspend fun getFrequentContacts(): Result<List<Account>>
+    suspend fun getContacts(): Result<List<Account>>
 }

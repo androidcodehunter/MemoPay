@@ -31,6 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/list_item_spacing_half"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/tvFrequentTitle"/>
 
     <androidx.appcompat.widget.AppCompatTextView

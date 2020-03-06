@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface TransactionDao {
 
-    @Query("select * from transactions where accountNumber =:accountNumber")
+    @Query("select * from transactions where receiverAccountNumber =:accountNumber")
     suspend fun getTransactions(accountNumber: String): List<com.memo.pay.data.db.table.Transaction>
 
     @Transaction

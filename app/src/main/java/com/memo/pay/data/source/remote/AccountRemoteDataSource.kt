@@ -44,7 +44,7 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
     override suspend fun getTransactionsHistory(accountNumber: String): Result<List<Transaction>> {
         // Simulate network by delaying the execution.
         val allTransactions = TRANSACTIONS_SERVICE_DATA.values.toList()
-        val transactionsByAccount = allTransactions.filter{ it.accountNumber == accountNumber }.toList()
+        val transactionsByAccount = allTransactions.filter{ it.receiverAccountNumber == accountNumber }.toList()
         delay(SERVICE_LATENCY_IN_MILLIS)
         return Success(transactionsByAccount)
     }
@@ -79,6 +79,31 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
             return@withContext Success(this)
         }
         return@withContext Error(Exception("Add money is not possible"))
+    }
+
+    override suspend fun getFrequentContacts(): Result<List<Account>> = withContext(ioDispatcher){
+        delay(SERVICE_LATENCY_IN_MILLIS)
+        return@withContext Success(mutableListOf(Account("1111111113", "Sarah Aliaherma", 1500.00, "AED", isOnline = true),
+            Account("1111111114", "Talal Shamoun", 1500.00, "AED"),
+            Account("1111111115", "Coman Quraishi", 1500.00, "AED", isOnline = true)))
+    }
+
+    override suspend fun getContacts(): Result<List<Account>> = withContext(ioDispatcher){
+        delay(SERVICE_LATENCY_IN_MILLIS)
+        return@withContext Success(mutableListOf(Account("1111111115", "Coman Quraishi", 1500.00, "AED", isFavorite = true, isOnline = true),
+            Account("1111111116", "Moe Khalifa", 1500.00, "AED", isFavorite = true),
+            Account("1111111113", "Sarah Aliaherma", 1500.00, "AED", isFavorite = true, isOnline = true),
+            Account("1111111117", "Abbad Maalouf", 1500.00, "AED"),
+            Account("1111111118", "Abbad Maalouf", 1500.00, "AED"),
+            Account("1111111119", "Boualem Atiyeh", 1500.00, "AED"),
+            Account("1111111120", "Fazl Naifeh", 1500.00, "AED"),
+            Account("1111111121", "Jamal Rahal", 1500.00, "AED"),
+            Account("1111111122", "Rashad Samaha", 1500.00, "AED"),
+            Account("1111111123", "Alim Essa", 1500.00, "AED"),
+            Account("1111111124", "Imad Amari", 1500.00, "AED"),
+            Account("1111111125", "Nahyan Harb", 1500.00, "AED"),
+            Account("1111111126", "Talal Shamoun", 1500.00, "AED"),
+            Account("1111111127", "Zafer Morcos", 1500.00, "AED")))
     }
 
 
