@@ -108,4 +108,7 @@
     <string name="you_can_also_send_money_by">You can also send money by</string>
     <string name="share_a_magic_link">Share a magic link</string>
     <string name="send_via_tap">Send via tap</string>
+    <string name="send_money_to">Send money to</string>
+    <string name="phone_number">Phone number</string>
+    <string name="error_amount_exceeded">Amount should not exceed or account should be valid!!</string>
 </resources>

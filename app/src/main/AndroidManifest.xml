@@ -15,7 +15,7 @@
         <activity
             android:name=".ui.onboarding.IntroActivity"
             android:label="@string/title_activity_intro"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.onboarding.SplashActivity"
             android:theme="@style/SplashTheme">
@@ -26,7 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.home.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

@@ -9,6 +9,21 @@ import com.memo.pay.data.source.AccountRepository
 
 class HomeViewModel(private val accountRepository: AccountRepository): ViewModel() {
     private var amountLiveData = MutableLiveData<Pair<Double, String>>()
+    private var myAccount: Account? = null
+
+    fun setMyAccount(account: Account){
+        myAccount = account
+    }
+
+    fun isAmountValid(amount: Double): Boolean {
+        if (amount.toString().isNullOrEmpty())return false
+        myAccount?.let {
+            if (amount <= it.balance){
+                return true
+            }
+        }
+        return false
+    }
 
     fun getTransactions(forceReload: Boolean, accountNumber: String): LiveData<Result<List<Transaction>>> {
        return liveData {

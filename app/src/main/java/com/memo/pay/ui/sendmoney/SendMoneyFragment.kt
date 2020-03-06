@@ -7,9 +7,37 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.memo.pay.R
+import com.memo.pay.data.Result
+import com.memo.pay.data.db.table.Account
+import com.memo.pay.extensions.showSnackBar
+import com.memo.pay.ui.home.HomeViewModel
+import com.memo.pay.utils.Constants
 import kotlinx.android.synthetic.main.fragment_send_money.*
+import kotlinx.android.synthetic.main.fragment_send_money.tvAccountBalance
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SendMoneyFragment: Fragment() {
+    private val homeViewModel: HomeViewModel by viewModel()
+
+    private val accountObserver = androidx.lifecycle.Observer<Result<Account>>{ result ->
+        when (result) {
+            is Result.Loading -> {
+                //showProgressLoading()
+            }
+            is Result.Success -> {
+                ///hideProgressLoading()
+                showAccount(result.data)
+            }
+            is Result.Error -> {
+                ///hideProgressLoading()
+            }
+        }
+    }
+
+    private fun showAccount(account: Account) {
+        homeViewModel.setMyAccount(account)
+        tvAccountBalance.text = account.getBalanceWithCurrency()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,8 +51,23 @@ class SendMoneyFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val vavController = Navigation.findNavController(view)
         btnNext.setOnClickListener {
-            vavController.navigate(R.id.action_sendMoneyFragment_to_ContactSelectionFragment)
+            when {
+                etEnterAmount.text.toString().isEmpty() -> {
+                    etEnterAmount.error = getString(R.string.amount_should_not_empty)
+                }
+                homeViewModel.isAmountValid(etEnterAmount.text.toString().toDouble()) -> {
+                    vavController.navigate(R.id.action_sendMoneyFragment_to_ContactSelectionFragment)
+                }
+                else -> {
+                    it.showSnackBar(getString(R.string.error_amount_exceeded))
+                }
+            }
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        homeViewModel.getAccount(true, Constants.CURRENT_ACCOUNT_NUMBER).observe(viewLifecycleOwner, accountObserver)
     }
 
 }
