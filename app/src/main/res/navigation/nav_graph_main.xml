@@ -53,6 +53,37 @@
     <fragment
         android:id="@+id/sendMoneyFragment"
         android:name="com.memo.pay.ui.sendmoney.SendMoneyFragment"
-        android:label="@string/send_money" />
+        android:label="@string/send_money" >
+        <action
+            android:id="@+id/action_sendMoneyFragment_to_ContactSelectionFragment"
+            app:destination="@id/contactSelectionFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/contactSelectionFragment"
+        android:name="com.memo.pay.ui.sendmoney.ContactSelectionFragment"
+        android:label="@string/enter_amount"
+        tools:layout="@layout/fragment_contact_selection">
+        <action
+            android:id="@+id/action_contactSelectionFragment_to_confirmTransferFragment"
+            app:destination="@id/confirmTransferFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/confirmTransferFragment"
+        android:name="com.memo.pay.ui.sendmoney.ConfirmTransferFragment"
+        android:label="@string/enter_amount"
+        tools:layout="@layout/fragment_confirm_transfer" />
+
 
 </navigation>
