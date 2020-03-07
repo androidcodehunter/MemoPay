@@ -17,6 +17,8 @@ import timber.log.Timber
 import java.util.*
 
 class ConfirmTransferFragment: Fragment() {
+    private var amount: Double = 0.0
+    private lateinit var account: Account
     private val homeViewModel: HomeViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,11 +52,11 @@ class ConfirmTransferFragment: Fragment() {
     }
 
     private fun initData() {
-        val account = arguments?.getSerializable(KEY_ACCOUNT) as Account
-        val amount = arguments?.getDouble(KEY_AMOUNT)
-
+        account = arguments?.getSerializable(KEY_ACCOUNT) as Account
+        arguments?.getDouble(KEY_AMOUNT)?.let {
+            amount = it
+        }
         tvCreditedAmount.text = amount.toString()
-
         Timber.d("account $account amount $amount")
     }
 
