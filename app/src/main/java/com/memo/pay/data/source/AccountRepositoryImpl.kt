@@ -3,6 +3,7 @@ package com.memo.pay.data.source
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
+import timber.log.Timber
 
 class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSource,
                             private val accountRemoteDataSource: AccountDataSource) :
@@ -60,7 +61,9 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
     override suspend fun getContacts(): Result<List<Account>> = accountRemoteDataSource.getContacts()
 
     override suspend fun sendMoney(transaction: Transaction): Result<Transaction> {
+        Timber.d("send money call")
         val transactionResponse = accountRemoteDataSource.sendMoney(transaction)
+        Timber.d("send money ${transactionResponse}")
         if (transactionResponse is Result.Success){
             accountLocalDataSource.sendMoney(transactionResponse.data)
         }

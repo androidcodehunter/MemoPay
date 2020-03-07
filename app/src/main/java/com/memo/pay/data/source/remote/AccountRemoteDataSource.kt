@@ -81,12 +81,19 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
 
     override suspend fun sendMoney(transaction: Transaction): Result<Transaction> = withContext(ioDispatcher){
         delay(SERVICE_LATENCY_IN_MILLIS)
+        //update the local account
         val dbTransaction = appDatabase.transactionDao().getTransaction(transaction.id)
         if (dbTransaction != null){
             return@withContext Error(Exception("You cannot transfer money"))
         }else{
-            TRANSACTIONS_SERVICE_DATA[transaction.id] = transaction
-            return@withContext Success(transaction)
+            try {
+                val account = appDatabase.accountDao().getAccount(transaction.senderAccountNumber)
+                appDatabase.accountDao().updateBalance((account.balance - transaction.transactionAmount), transaction.senderAccountNumber)
+                TRANSACTIONS_SERVICE_DATA[transaction.id] = transaction
+                return@withContext Success(transaction)
+            }catch (e: java.lang.Exception){
+                return@withContext Error(Exception("Transfer money is not possible, try again"))
+            }
         }
     }
 

@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.memo.pay.R
+import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
+import com.memo.pay.data.db.table.Transaction
 import com.memo.pay.ui.home.HomeViewModel
 import com.memo.pay.ui.sendmoney.ContactSelectionFragment.Companion.KEY_AMOUNT
 import com.memo.pay.utils.Constants
@@ -18,6 +20,28 @@ class ConfirmTransferFragment: Fragment() {
     private var amount: Double = 0.0
     private lateinit var account: Account
     private val homeViewModel: HomeViewModel by viewModel()
+
+    private val sendMoneyResponse = androidx.lifecycle.Observer<Result<Transaction>>{ result ->
+
+        Timber.d("send money response ${result}")
+
+        when (result) {
+            is Result.Loading -> {
+                ///showProgressLoading()
+            }
+            is Result.Success -> {
+                //hideProgressLoading()
+                ///showFrequentContacts(result.data)
+            }
+            is Result.Error -> {
+                //hideProgressLoading()
+                ///showError()
+            }
+        }
+    }
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,7 +53,7 @@ class ConfirmTransferFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnSendMoney.setOnClickListener {
-            homeViewModel.sendMoney(amount, Constants.CURRENT_ACCOUNT_NUMBER, account)
+            homeViewModel.sendMoney(amount, Constants.CURRENT_ACCOUNT_NUMBER, account).observe(viewLifecycleOwner, sendMoneyResponse)
         }
     }
 
