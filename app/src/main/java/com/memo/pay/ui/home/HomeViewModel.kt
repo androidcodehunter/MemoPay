@@ -82,12 +82,17 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         }
     }
 
-    fun getContacts(): LiveData<Result<List<Account>>> {
+    fun getContacts(favContactTitle: String, otherContactTitle: String): LiveData<Result<List<Any>>> {
         return liveData {
             emit(Result.Loading)
             val contactResponse = accountRepository.getContacts()
             if (contactResponse is Result.Success){
-                emit(Result.Success(contactResponse.data))
+                val list = mutableListOf<Any>()
+                list.add(favContactTitle)
+                list.addAll(contactResponse.data.filter { it.isFavorite })
+                list.add(otherContactTitle)
+                list.addAll(contactResponse.data.filter { !it.isFavorite })
+                emit(Result.Success(list.toList()))
             }else if (contactResponse is Result.Error){
                 emit(Result.Error(contactResponse.exception))
             }

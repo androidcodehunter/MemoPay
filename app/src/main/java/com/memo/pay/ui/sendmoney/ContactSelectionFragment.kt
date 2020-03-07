@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -44,7 +45,7 @@ class ContactSelectionFragment: Fragment() {
         mFrequentAdapter.submitList(frequentContacts)
     }
 
-    private val contactObserver = androidx.lifecycle.Observer<Result<List<Account>>>{ result ->
+    private val contactObserver = androidx.lifecycle.Observer<Result<List<Any>>>{ result ->
         when (result) {
             is Result.Loading -> {
                // showProgressLoading()
@@ -60,7 +61,7 @@ class ContactSelectionFragment: Fragment() {
         }
     }
 
-    private fun showContacts(contacts: List<Account>) {
+    private fun showContacts(contacts: List<Any>) {
         mContactAdapter.submitList(contacts)
     }
 
@@ -90,7 +91,11 @@ class ContactSelectionFragment: Fragment() {
         listContact.apply {
             adapter = mContactAdapter
             addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
+            isNestedScrollingEnabled = true
+            setHasFixedSize(true)
         }
+
+
     }
 
     private fun setFrequentListAdapter() {
@@ -111,7 +116,7 @@ class ContactSelectionFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         homeViewModel.getFrequentContacts().observe(viewLifecycleOwner, frequentContactObserver)
-        homeViewModel.getContacts().observe(viewLifecycleOwner, contactObserver)
+        homeViewModel.getContacts(getString(R.string.favorites), getString(R.string.other_contacts)).observe(viewLifecycleOwner, contactObserver)
     }
 
 }
