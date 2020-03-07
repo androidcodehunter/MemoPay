@@ -5,12 +5,13 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(tableName = "transactions")
-data class Transaction(@PrimaryKey val id: String,
-                       val name: String,
+data class Transaction(val name: String,
                        val type: String,
                        val transactionAmount: Double,
                        val currency: String,
                        val profileUrl: String,
                        val date: Date,
                        val senderAccountNumber: String,
-                       val receiverAccountNumber: String)
+                       val receiverAccountNumber: String){
+    @PrimaryKey(autoGenerate = true) var id: Int = 0
+}

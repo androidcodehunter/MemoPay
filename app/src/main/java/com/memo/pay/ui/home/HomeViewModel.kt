@@ -6,6 +6,10 @@ import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
 import com.memo.pay.data.source.AccountRepository
+import com.memo.pay.utils.Constants.ACCOUNT_TYPE_SENT
+import com.memo.pay.utils.Constants.CURRENCY_AED
+import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
+import java.util.*
 
 class HomeViewModel(private val accountRepository: AccountRepository): ViewModel() {
     private var amountLiveData = MutableLiveData<Pair<Double, String>>()
@@ -100,6 +104,16 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
     }
 
     fun sendMoney(amount: Double, senderAccountNumber: String, receiverAccount: Account) {
+        val transaction = Transaction(receiverAccount.name, ACCOUNT_TYPE_SENT, amount, CURRENCY_AED, receiverAccount.profilePic, Date(), receiverAccount.accountNumber, CURRENT_ACCOUNT_NUMBER)
+
+      /*  return liveData{  emit(Result.Loading)
+        val frequentContactResponse = accountRepository.getFrequentContacts()
+        if (frequentContactResponse is Result.Success){
+            emit(Result.Success(frequentContactResponse.data))
+        }else if (frequentContactResponse is Result.Error){
+            emit(Result.Error(frequentContactResponse.exception))
+        }
+        }*/
     }
 
 

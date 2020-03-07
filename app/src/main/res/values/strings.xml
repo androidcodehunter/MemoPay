@@ -110,7 +110,7 @@
     <string name="send_via_tap">Send via tap</string>
     <string name="send_money_to">Send money to</string>
     <string name="phone_number">Phone number</string>
-    <string name="error_amount_exceeded">Amount should not exceed or account should be valid!!</string>
+    <string name="error_amount_exceeded">Amount should not exceed, zero or account should be valid!!</string>
     <string name="favorites">Favorites</string>
     <string name="other_contacts">Other contacts</string>
     <string name="send">Send</string>

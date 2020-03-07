@@ -9,7 +9,7 @@ interface TransactionDao {
     suspend fun getTransactions(senderAccountNumber: String): List<com.memo.pay.data.db.table.Transaction>
 
     @Query("select * from transactions where id =:transactionId")
-    suspend fun getTransaction(transactionId: String): com.memo.pay.data.db.table.Transaction
+    suspend fun getTransaction(transactionId: Int): com.memo.pay.data.db.table.Transaction
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)

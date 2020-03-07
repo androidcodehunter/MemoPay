@@ -8,9 +8,13 @@ import kotlinx.coroutines.delay
 import com.memo.pay.data.Result.Error
 import com.memo.pay.data.Result.Success
 import com.memo.pay.data.db.AppDatabase
+import com.memo.pay.utils.Constants.ACCOUNT_TYPE_RECEIVED
+import com.memo.pay.utils.Constants.ACCOUNT_TYPE_SENT
+import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.util.*
 import kotlin.collections.LinkedHashMap
 
@@ -20,20 +24,29 @@ private const val SERVICE_LATENCY_IN_MILLIS = 200L
 class AccountRemoteDataSource(private val appDatabase: AppDatabase,
                               private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AccountDataSource {
 
-    private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<String, Transaction>(2)
+    private var TRANSACTIONS_SERVICE_DATA = LinkedHashMap<Int, Transaction>(2)
     private var ACCOUNT_SERVICE_DATA = LinkedHashMap<String, Account>(2)
 
     init {
         /* TODO initial fake api data loading. This will be removed and each function replaced by retrofit suspend keyword for calling remote api in production. */
         addAccount(Account("1111111111", "Sharif", 1500.00, "AED"))
         addAccount(Account("1111111112", "Imad", 1200.00, "AED"))
-        addTransaction(Transaction("1", "Sharifur", "sent", 10.00, "AED", "", Date(), "1111111111", "1111111111"))
-        addTransaction(Transaction("2", "Sharifur", "sent", 10.00, "AED", "", Date(), "1111111111", "1111111111"))
-        addTransaction(Transaction("3", "Sharifur", "sent", 10.00, "AED", "", Date(), "1111111111", "1111111111"))
-        addTransaction(Transaction("4", "Sharifur", "received", 10.00, "AED", "", Date(), "1111111112", "1111111111"))
+        var transaction = Transaction( "Sharifur", ACCOUNT_TYPE_SENT, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
+        transaction.id = 1
+        addTransaction(transaction)
+        transaction = Transaction( "Sharifur", ACCOUNT_TYPE_SENT, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
+        transaction.id = 2
+        addTransaction(transaction)
+        transaction = Transaction( "Sharifur", ACCOUNT_TYPE_SENT, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
+        transaction.id = 3
+        addTransaction(transaction)
+        transaction = Transaction( "Sharifur", ACCOUNT_TYPE_RECEIVED, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
+        transaction.id = 4
+        addTransaction(transaction)
     }
 
     private fun addTransaction(transaction: Transaction) {
+        Timber.d("transaction id ${transaction.id} transactions ${transaction}")
         TRANSACTIONS_SERVICE_DATA[transaction.id] = transaction
     }
 
@@ -44,7 +57,7 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
     override suspend fun getTransactionsHistory(accountNumber: String): Result<List<Transaction>> {
         // Simulate network by delaying the execution.
         val allTransactions = TRANSACTIONS_SERVICE_DATA.values.toList()
-        val transactionsByAccount = allTransactions.filter{ it.receiverAccountNumber == accountNumber }.toList()
+        val transactionsByAccount = allTransactions.filter{ it.senderAccountNumber == accountNumber }.toList()
         delay(SERVICE_LATENCY_IN_MILLIS)
         return Success(transactionsByAccount)
     }
@@ -81,7 +94,7 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
 
     }
 
-    /*TODO fake add money here the user’s balance automatically incremented by provided AED. This will be replaced by real api call*/
+    /*TODO fake add money here the user’s balance automatically incremented by provided AED. This will be replaced by real api call by suspend function*/
     override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> = withContext(ioDispatcher){
         delay(SERVICE_LATENCY_IN_MILLIS)
         val account = appDatabase.accountDao().getAccount(accountNumber)

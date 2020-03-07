@@ -18,6 +18,7 @@ import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class HomeFragment : Fragment() {
 
@@ -60,6 +61,7 @@ class HomeFragment : Fragment() {
     }
 
     private val transactionsObserver = androidx.lifecycle.Observer<Result<List<Transaction>>>{ result ->
+        Timber.d("transactions ${result}")
         when (result) {
             is Result.Loading -> {
                 showProgressLoading()
