@@ -28,9 +28,7 @@ class ContactAdapter(val onContactClickListener: (contact: Account) -> Unit) :
 
         init {
             itemView.setOnClickListener {
-                /* getItem(adapterPosition).html_url?.let{
-                     onTransactionItemClickListener(it)
-                 }*/
+                onContactClickListener.invoke(getItem(adapterPosition))
             }
         }
 

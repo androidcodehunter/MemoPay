@@ -84,7 +84,9 @@ class ContactSelectionFragment: Fragment() {
     }
 
     private fun setContactAdapter() {
-        mContactAdapter = ContactAdapter {  }
+        mContactAdapter = ContactAdapter {
+            Timber.d("contact clicked $it")
+        }
         listContact.apply {
             adapter = mContactAdapter
             addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
@@ -92,7 +94,9 @@ class ContactSelectionFragment: Fragment() {
     }
 
     private fun setFrequentListAdapter() {
-        mFrequentAdapter = FrequentContactAdapter {  }
+        mFrequentAdapter = FrequentContactAdapter {
+            Timber.d("frequent contact clicked $it")
+        }
         listFrequent.apply {
             adapter = mFrequentAdapter
             PagerSnapHelper().attachToRecyclerView(this)

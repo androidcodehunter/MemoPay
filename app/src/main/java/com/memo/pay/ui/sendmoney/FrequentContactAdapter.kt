@@ -28,9 +28,7 @@ class FrequentContactAdapter (val onFrequentContactClickListener: (frequentConta
 
         init {
             itemView.setOnClickListener {
-                /* getItem(adapterPosition).html_url?.let{
-                     onTransactionItemClickListener(it)
-                 }*/
+                onFrequentContactClickListener.invoke(getItem(adapterPosition))
             }
         }
 
