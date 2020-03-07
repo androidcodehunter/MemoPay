@@ -103,9 +103,11 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         }
     }
 
-    fun sendMoney(amount: Double, senderAccountNumber: String, receiverAccount: Account) {
+    fun sendMoney(amount: Double, senderAccountNumber: String, receiverAccount: Account): LiveData<Any> {
         val transaction = Transaction(receiverAccount.name, ACCOUNT_TYPE_SENT, amount, CURRENCY_AED, receiverAccount.profilePic, Date(), receiverAccount.accountNumber, CURRENT_ACCOUNT_NUMBER)
-
+        return liveData {
+            accountRepository.sendMoney(transaction)
+        }
       /*  return liveData{  emit(Result.Loading)
         val frequentContactResponse = accountRepository.getFrequentContacts()
         if (frequentContactResponse is Result.Success){
