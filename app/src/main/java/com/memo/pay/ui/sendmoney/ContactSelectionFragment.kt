@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,7 @@ class ContactSelectionFragment: Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
     private lateinit var mFrequentAdapter: FrequentContactAdapter
     private lateinit var mContactAdapter: ContactAdapter
+    private lateinit var vavController: NavController
     private val frequentContactObserver = androidx.lifecycle.Observer<Result<List<Account>>>{ result ->
         when (result) {
             is Result.Loading -> {
@@ -76,10 +78,7 @@ class ContactSelectionFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val vavController = Navigation.findNavController(view)
-        btnSendViaOtp.setOnClickListener {
-            vavController.navigate(R.id.action_contactSelectionFragment_to_confirmTransferFragment)
-        }
+        vavController = Navigation.findNavController(view)
         setFrequentListAdapter()
         setContactAdapter()
     }
@@ -87,6 +86,7 @@ class ContactSelectionFragment: Fragment() {
     private fun setContactAdapter() {
         mContactAdapter = ContactAdapter {
             Timber.d("contact clicked $it")
+            vavController.navigate(R.id.action_contactSelectionFragment_to_confirmTransferFragment)
         }
         listContact.apply {
             adapter = mContactAdapter
@@ -95,12 +95,12 @@ class ContactSelectionFragment: Fragment() {
             setHasFixedSize(true)
         }
 
-
     }
 
     private fun setFrequentListAdapter() {
         mFrequentAdapter = FrequentContactAdapter {
             Timber.d("frequent contact clicked $it")
+            vavController.navigate(R.id.action_contactSelectionFragment_to_confirmTransferFragment)
         }
         listFrequent.apply {
             adapter = mFrequentAdapter
