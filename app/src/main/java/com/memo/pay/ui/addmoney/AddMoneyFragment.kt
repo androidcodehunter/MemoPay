@@ -1,5 +1,6 @@
 package com.memo.pay.ui.addmoney
 
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
@@ -15,16 +17,23 @@ import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.extensions.hideKeyboard
+import com.memo.pay.notification.BasicNotification
+import com.memo.pay.notification.NotificationChannelFactory
+import com.memo.pay.notification.NotificationFactory
+import com.memo.pay.notification.NotificationType
 import com.memo.pay.ui.home.HomeViewModel
 import com.memo.pay.ui.home.MainActivity
 import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_money.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class AddMoneyFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
+    private val notificationFactory: NotificationFactory by inject()
+    private val notificationChannelFactory: NotificationChannelFactory by inject()
 
     private val accountObserver = androidx.lifecycle.Observer<Result<Account>>{ result ->
         when (result) {
@@ -63,15 +72,15 @@ class AddMoneyFragment : Fragment() {
        }
     }
 
-    private val addMoneyObserver = androidx.lifecycle.Observer<Result<Account>>{ result ->
+    private val addMoneyObserver = androidx.lifecycle.Observer<Result<HomeViewModel.AddMoney>>{ result ->
         when (result) {
             is Result.Loading -> {
                 showProgressLoading()
             }
             is Result.Success -> {
                 hideProgressLoading()
-                showAccount(result.data)
-                showAddMoneyNotification()
+                showAccount(result.data.account)
+                showAddMoneyNotification(result.data.amount)
             }
             is Result.Error -> {
                 hideProgressLoading()
@@ -119,39 +128,19 @@ class AddMoneyFragment : Fragment() {
     }
 
 
-    private fun showAddMoneyNotification() {
-       /* val intent = Intent(context, TodayWordActivity::class.java)
-        intent.putExtra(SyncStateContract.Constants.WORD_ID, todayWord)
-        // Set the Activity to start in a new, empty task
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        val pendingIntent = PendingIntent.getActivity(
-            context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT
+    /*TODO show basic notification when add money is successful. Check {@link NotificationFactory} class for more details.*/
+    private fun showAddMoneyNotification(amount: Double) {
+        val notification = BasicNotification(getString(R.string.notifications_general_channel_id),
+            getString(R.string.notifications_title_add_money),
+            String.format(getString(R.string.notifications_content_add_money), amount.toString()),
+            NotificationCompat.PRIORITY_HIGH
         )
 
-        val channelId = context.getString(R.string.default_notification_channel_id)
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(context, channelId)
-        notificationBuilder.color = ContextCompat.getColor(context, R.color.colorPrimary)
-        notificationBuilder.setSmallIcon(R.drawable.ic_notification)
-        notificationBuilder.setContentTitle(context.getString(R.string.fcm_message) + ": " + todayWord)
-        notificationBuilder.setContentText(context.getString(R.string.tap_to_see_mnemonic))
-        notificationBuilder.setAutoCancel(true)
-        notificationBuilder.setSound(defaultSoundUri)
-        notificationBuilder.setContentIntent(pendingIntent)
-        notificationBuilder.priority = NotificationCompat.PRIORITY_HIGH
-        notificationBuilder.setDefaults(NotificationCompat.DEFAULT_ALL)
-
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId,
-                context.getString(R.string.fcm_message),
-                NotificationManager.IMPORTANCE_DEFAULT)
-            notificationManager.createNotificationChannel(channel)
+            notificationFactory.showNotification(NotificationType.BASIC.ordinal, notification, notificationChannelFactory.getDefaultChannel())
+        }else{
+            notificationFactory.showNotification(NotificationType.BASIC.ordinal, notification)
         }
-
-        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())*/
     }
 
     companion object {

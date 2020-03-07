@@ -63,12 +63,12 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
 
     fun getAmount() = amountLiveData
 
-    fun addMoney(amount: Double, accountNumber: String): LiveData<Result<Account>> {
+    fun addMoney(amount: Double, accountNumber: String): LiveData<Result<AddMoney>> {
         return liveData {
             emit(Result.Loading)
             val accountResult = accountRepository.addMoney(amount, accountNumber)
             if (accountResult is Result.Success){
-                emit(Result.Success(accountResult.data))
+                emit(Result.Success(AddMoney(amount, accountResult.data)))
             }else if (accountResult is Result.Error){
                 emit(Result.Error(accountResult.exception))
             }
@@ -117,6 +117,8 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         }
     }
 
+
+    data class AddMoney(val amount: Double, val account: Account)
 
     @Suppress("UNCHECKED_CAST")
     class HomeViewModelFactory(private val accountRepository: AccountRepository) :
