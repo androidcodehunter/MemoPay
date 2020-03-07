@@ -22,6 +22,7 @@ import timber.log.Timber
 class ContactSelectionFragment: Fragment() {
     private val homeViewModel: HomeViewModel by viewModel()
     private lateinit var mFrequentAdapter: FrequentContactAdapter
+    private lateinit var mContactAdapter: ContactAdapter
     private val frequentContactObserver = androidx.lifecycle.Observer<Result<List<Account>>>{ result ->
         when (result) {
             is Result.Loading -> {
@@ -60,7 +61,7 @@ class ContactSelectionFragment: Fragment() {
     }
 
     private fun showContacts(contacts: List<Account>) {
-
+        mContactAdapter.submitList(contacts)
     }
 
 
@@ -79,6 +80,15 @@ class ContactSelectionFragment: Fragment() {
             vavController.navigate(R.id.action_contactSelectionFragment_to_confirmTransferFragment)
         }
         setFrequentListAdapter()
+        setContactAdapter()
+    }
+
+    private fun setContactAdapter() {
+        mContactAdapter = ContactAdapter {  }
+        listContact.apply {
+            adapter = mContactAdapter
+            addItemDecoration(DividerItemDecoration(context, (layoutManager as LinearLayoutManager).orientation))
+        }
     }
 
     private fun setFrequentListAdapter() {
