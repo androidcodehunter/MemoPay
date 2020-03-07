@@ -61,6 +61,11 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="key_amount"
+            app:argType="float" />
+
     </fragment>
 
 
@@ -76,6 +81,11 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="key_account"
+            app:argType="com.memo.pay.data.db.table.Account" />
+
     </fragment>
 
 

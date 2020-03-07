@@ -13,4 +13,5 @@ interface AccountDataSource {
     suspend fun addMoney(amount: Double, accountNumber: String): Result<Account>
     suspend fun getFrequentContacts(): Result<List<Account>>
     suspend fun getContacts(): Result<List<Account>>
+    suspend fun sendMoney(transaction: Transaction): Result<Transaction>
 }

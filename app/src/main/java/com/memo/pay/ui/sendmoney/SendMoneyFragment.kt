@@ -56,7 +56,9 @@ class SendMoneyFragment: Fragment() {
                     etEnterAmount.error = getString(R.string.amount_should_not_empty)
                 }
                 homeViewModel.isAmountValid(etEnterAmount.text.toString().toDouble()) -> {
-                    vavController.navigate(R.id.action_sendMoneyFragment_to_ContactSelectionFragment)
+                    val bundle = Bundle()
+                    bundle.putDouble(KEY_AMOUNT, etEnterAmount.text.toString().toDouble())
+                    vavController.navigate(R.id.action_sendMoneyFragment_to_ContactSelectionFragment, bundle)
                 }
                 else -> {
                     it.showSnackBar(getString(R.string.error_amount_exceeded))
@@ -68,6 +70,10 @@ class SendMoneyFragment: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         homeViewModel.getAccount(true, Constants.CURRENT_ACCOUNT_NUMBER).observe(viewLifecycleOwner, accountObserver)
+    }
+
+    companion object{
+        const val KEY_AMOUNT = "key_amount"
     }
 
 }

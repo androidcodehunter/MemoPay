@@ -26,4 +26,27 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Caption"/>
 
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvLabelAccountCredited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/amount_credited"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelPhoneNumber"/>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvCreditedAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelAccountCredited"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSendMoney"
+        android:text="@string/send"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

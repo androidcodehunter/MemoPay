@@ -16,7 +16,7 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
     }
 
     fun isAmountValid(amount: Double): Boolean {
-        if (amount.toString().isNullOrEmpty())return false
+        if (amount.toString().isNullOrEmpty() || amount.toString().toDouble() <= 0)return false
         myAccount?.let {
             if (amount <= it.balance){
                 return true
@@ -97,6 +97,9 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
                 emit(Result.Error(contactResponse.exception))
             }
         }
+    }
+
+    fun sendMoney(amount: Double, senderAccountNumber: String, receiverAccount: Account) {
     }
 
 

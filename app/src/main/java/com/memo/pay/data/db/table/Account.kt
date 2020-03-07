@@ -2,6 +2,7 @@ package com.memo.pay.data.db.table
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
 data class Account(@PrimaryKey val accountNumber: String,
@@ -10,6 +11,6 @@ data class Account(@PrimaryKey val accountNumber: String,
                    var currency: String,
                    var isFavorite: Boolean = false,
                    var isOnline: Boolean = false,
-                   var profilePic: String = ""){
+                   var profilePic: String = "") : Serializable{
     fun getBalanceWithCurrency() = "$currency $balance"
 }

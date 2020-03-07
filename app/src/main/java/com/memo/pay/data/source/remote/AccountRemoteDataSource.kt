@@ -66,6 +66,17 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
         TRANSACTIONS_SERVICE_DATA[transaction.id] = transaction
     }
 
+    override suspend fun sendMoney(transaction: Transaction): Result<Transaction> = withContext(ioDispatcher){
+        delay(SERVICE_LATENCY_IN_MILLIS)
+        val dbTransaction = appDatabase.transactionDao().getTransaction(transaction.id)
+        if (dbTransaction != null){
+            return@withContext Error(Exception("You cannot transfer money"))
+        }else{
+            TRANSACTIONS_SERVICE_DATA[transaction.id] = transaction
+            return@withContext Success(transaction)
+        }
+    }
+
     override suspend fun saveTransactions(transactions: List<Transaction>) {
 
     }
@@ -105,6 +116,8 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
             Account("1111111126", "Talal Shamoun", 1500.00, "AED"),
             Account("1111111127", "Zafer Morcos", 1500.00, "AED")))
     }
+
+
 
 
 }

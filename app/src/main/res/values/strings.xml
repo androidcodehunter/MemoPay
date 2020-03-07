@@ -113,4 +113,6 @@
     <string name="error_amount_exceeded">Amount should not exceed or account should be valid!!</string>
     <string name="favorites">Favorites</string>
     <string name="other_contacts">Other contacts</string>
+    <string name="send">Send</string>
+    <string name="amount_credited">Amount credited</string>
 </resources>

@@ -59,5 +59,13 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
 
     override suspend fun getContacts(): Result<List<Account>> = accountRemoteDataSource.getContacts()
 
+    override suspend fun sendMoney(transaction: Transaction): Result<Transaction> {
+        val transactionResponse = accountRemoteDataSource.sendMoney(transaction)
+        if (transactionResponse is Result.Success){
+            accountLocalDataSource.sendMoney(transactionResponse.data)
+        }
+        return transactionResponse
+    }
+
 
 }

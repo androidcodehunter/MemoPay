@@ -62,5 +62,14 @@ class AccountLocalDataSource(private val appDatabase: AppDatabase,
         return Error(Exception())
     }
 
+    override suspend fun sendMoney(transaction: Transaction): Result<Transaction> = withContext(ioDispatcher){
+        appDatabase.transactionDao().saveTransaction(transaction)
+        try {
+            return@withContext Success(transaction)
+        }catch (e: Exception){
+            return@withContext Error(e)
+        }
+    }
+
 
 }

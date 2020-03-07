@@ -5,8 +5,11 @@ import androidx.room.*
 @Dao
 interface TransactionDao {
 
-    @Query("select * from transactions where receiverAccountNumber =:accountNumber")
-    suspend fun getTransactions(accountNumber: String): List<com.memo.pay.data.db.table.Transaction>
+    @Query("select * from transactions where senderAccountNumber =:senderAccountNumber")
+    suspend fun getTransactions(senderAccountNumber: String): List<com.memo.pay.data.db.table.Transaction>
+
+    @Query("select * from transactions where id =:transactionId")
+    suspend fun getTransaction(transactionId: String): com.memo.pay.data.db.table.Transaction
 
     @Transaction
     @Insert(onConflict = OnConflictStrategy.REPLACE)

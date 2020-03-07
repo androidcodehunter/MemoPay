@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.ui.home.HomeViewModel
+import com.memo.pay.ui.sendmoney.ConfirmTransferFragment.Companion.KEY_ACCOUNT
 import kotlinx.android.synthetic.main.fragment_contact_selection.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -26,6 +25,7 @@ class ContactSelectionFragment: Fragment() {
     private lateinit var mFrequentAdapter: FrequentContactAdapter
     private lateinit var mContactAdapter: ContactAdapter
     private lateinit var vavController: NavController
+    private var mAmount: Double? = 0.0
     private val frequentContactObserver = androidx.lifecycle.Observer<Result<List<Account>>>{ result ->
         when (result) {
             is Result.Loading -> {
@@ -86,7 +86,7 @@ class ContactSelectionFragment: Fragment() {
     private fun setContactAdapter() {
         mContactAdapter = ContactAdapter {
             Timber.d("contact clicked $it")
-            vavController.navigate(R.id.action_contactSelectionFragment_to_confirmTransferFragment)
+            gotoConfirmTransferFragment(it)
         }
         listContact.apply {
             adapter = mContactAdapter
@@ -100,7 +100,7 @@ class ContactSelectionFragment: Fragment() {
     private fun setFrequentListAdapter() {
         mFrequentAdapter = FrequentContactAdapter {
             Timber.d("frequent contact clicked $it")
-            vavController.navigate(R.id.action_contactSelectionFragment_to_confirmTransferFragment)
+            gotoConfirmTransferFragment(it)
         }
         listFrequent.apply {
             adapter = mFrequentAdapter
@@ -113,10 +113,25 @@ class ContactSelectionFragment: Fragment() {
         }
     }
 
+    private fun gotoConfirmTransferFragment(account: Account){
+        val bundle = Bundle()
+        bundle.putSerializable(KEY_ACCOUNT, account)
+        mAmount?.let {
+            bundle.putDouble(KEY_AMOUNT, it)
+        }
+        vavController.navigate(R.id.action_contactSelectionFragment_to_confirmTransferFragment, bundle)
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        mAmount = arguments?.getDouble(KEY_AMOUNT)
         homeViewModel.getFrequentContacts().observe(viewLifecycleOwner, frequentContactObserver)
         homeViewModel.getContacts(getString(R.string.favorites), getString(R.string.other_contacts)).observe(viewLifecycleOwner, contactObserver)
+    }
+
+
+    companion object{
+        const val KEY_AMOUNT = "key_amount"
     }
 
 }
