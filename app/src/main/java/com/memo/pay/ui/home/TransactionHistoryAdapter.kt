@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.memo.pay.R
 import com.memo.pay.data.db.table.Transaction
-import com.memo.pay.utils.Constants
 import com.memo.pay.utils.Constants.ACCOUNT_TYPE_SENT
 import kotlinx.android.synthetic.main.list_item_transaction_history.view.*
+import java.util.*
 
 const val ITEM_TYPE_TRANSACTION = 1
 const val ITEM_TYPE_DATE = 2
@@ -44,9 +44,9 @@ class TransactionHistoryAdapter(val onTransactionItemClickListener: (transaction
 
     override fun getItemViewType(position: Int): Int {
         val transactionItem = getItem(position)
-        return if (transactionItem is String){
-            ITEM_TYPE_DATE
-        }else ITEM_TYPE_TRANSACTION
+        return if (transactionItem is Transaction){
+            ITEM_TYPE_TRANSACTION
+        }else ITEM_TYPE_DATE
     }
 
     inner class ViewHolderTransaction(itemView: View) : RecyclerView.ViewHolder(itemView) {

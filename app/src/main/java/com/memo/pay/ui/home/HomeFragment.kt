@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
         (activity as MainActivity).toolbar_main.visibility = GONE
     }
 
-    private val transactionsObserver = androidx.lifecycle.Observer<Result<List<Transaction>>>{ result ->
+    private val transactionsObserver = androidx.lifecycle.Observer<Result<List<Any>>>{ result ->
         Timber.d("transactions ${result}")
         when (result) {
             is Result.Loading -> {
@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showTransactions(transactions: List<Transaction>) {
+    private fun showTransactions(transactions: List<Any>) {
         mTransactionAdapter.submitList(transactions)
     }
 

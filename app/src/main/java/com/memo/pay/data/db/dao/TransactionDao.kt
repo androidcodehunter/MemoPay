@@ -5,7 +5,7 @@ import androidx.room.*
 @Dao
 interface TransactionDao {
 
-    @Query("select * from transactions where senderAccountNumber =:senderAccountNumber order by date")
+    @Query("select * from transactions where senderAccountNumber =:senderAccountNumber order by date DESC")
     suspend fun getTransactions(senderAccountNumber: String): List<com.memo.pay.data.db.table.Transaction>
 
     @Query("select * from transactions where id =:transactionId")

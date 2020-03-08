@@ -10,6 +10,9 @@ import com.memo.pay.utils.Constants.ACCOUNT_TYPE_SENT
 import com.memo.pay.utils.Constants.CURRENCY_AED
 import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatter.ofPattern
 import java.util.*
 
 class HomeViewModel(private val accountRepository: AccountRepository): ViewModel() {
@@ -30,26 +33,25 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         return false
     }
 
-    fun getTransactions(forceReload: Boolean, accountNumber: String): LiveData<Result<List<Transaction>>> {
+    fun getTransactions(forceReload: Boolean, accountNumber: String): LiveData<Result<List<Any>>> {
        return liveData {
            emit(Result.Loading)
             val transactionResult = accountRepository.getTransactionsHistory(true, accountNumber)
            if (transactionResult is Result.Success){
+               var formatter = SimpleDateFormat("dd MMMM")
+               val transactionMap = transactionResult.data.groupBy { formatter.format(it.date) }
 
-               val transactionMap = transactionResult.data.groupBy { it.date }
-
-               val list = mutableListOf<Any>()
+               val transactionList = mutableListOf<Any>()
                transactionMap.keys.forEach { key ->
-                   list.add(key)
+                //   var formatter = SimpleDateFormat("dd-MMMM")
+                  /// var formattedDate = formatter.format(key)
+                   transactionList.add(key)
                    val transactions = transactionMap[key]
                    transactions?.forEach {
-                       list.add(it)
+                       transactionList.add(it)
                    }
                }
-
-               Timber.d("transactions lists ${list}")
-
-               emit(Result.Success(transactionResult.data))
+               emit(Result.Success(transactionList.toList()))
            }else if (transactionResult is Result.Error){
                emit(Result.Error(transactionResult.exception))
            }
