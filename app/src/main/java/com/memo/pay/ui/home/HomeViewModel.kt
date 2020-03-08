@@ -36,7 +36,6 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
             val transactionResult = accountRepository.getTransactionsHistory(true, accountNumber)
            if (transactionResult is Result.Success){
 
-
                val transactionMap = transactionResult.data.groupBy { it.date }
 
                val list = mutableListOf<Any>()
