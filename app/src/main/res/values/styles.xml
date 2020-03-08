@@ -51,4 +51,12 @@
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Caption</item>
     </style>
 
+    <style name="BlueButton">
+        <item name="android:background">@drawable/btn_selector_blue</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
 </resources>
