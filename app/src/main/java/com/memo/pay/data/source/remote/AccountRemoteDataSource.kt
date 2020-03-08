@@ -31,10 +31,10 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
         /* TODO initial fake api data loading. This will be removed and each function replaced by retrofit suspend keyword for calling remote api in production. */
         addAccount(Account("1111111111", "Sharif", 1500.00, "AED"))
         addAccount(Account("1111111112", "Imad", 1200.00, "AED"))
-        var transaction = Transaction( "Sharifur", ACCOUNT_TYPE_SENT, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
+        var transaction = Transaction( "Sharifur", ACCOUNT_TYPE_RECEIVED, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
         transaction.id = 1
         addTransaction(transaction)
-        transaction = Transaction( "Sharifur", ACCOUNT_TYPE_SENT, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
+        transaction = Transaction( "Sharifur", ACCOUNT_TYPE_RECEIVED, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
         transaction.id = 2
         addTransaction(transaction)
         transaction = Transaction( "Sharifur", ACCOUNT_TYPE_SENT, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")

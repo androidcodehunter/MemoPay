@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.memo.pay.R
 import com.memo.pay.data.db.table.Transaction
+import com.memo.pay.utils.Constants
+import com.memo.pay.utils.Constants.ACCOUNT_TYPE_SENT
 import kotlinx.android.synthetic.main.list_item_transaction_history.view.*
 
 const val ITEM_TYPE_TRANSACTION = 1
@@ -61,6 +63,11 @@ class TransactionHistoryAdapter(val onTransactionItemClickListener: (transaction
             itemView.tvTransactorName.text = transaction.name
             itemView.tvSendReceiveStatus.text = transaction.type
             itemView.tvTransactionAmount.text = "${transaction.currency} ${transaction.transactionAmount}"
+            if (transaction.type == ACCOUNT_TYPE_SENT){
+                itemView.imgTransactionType.setImageResource(R.drawable.ic_sent)
+            }else{
+                itemView.imgTransactionType.setImageResource(R.drawable.ic_receive)
+            }
         }
     }
 

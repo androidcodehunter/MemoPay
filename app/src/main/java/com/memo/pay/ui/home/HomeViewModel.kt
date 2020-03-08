@@ -35,6 +35,21 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
            emit(Result.Loading)
             val transactionResult = accountRepository.getTransactionsHistory(true, accountNumber)
            if (transactionResult is Result.Success){
+
+
+               val transactionMap = transactionResult.data.groupBy { it.date }
+
+               val list = mutableListOf<Any>()
+               transactionMap.keys.forEach { key ->
+                   list.add(key)
+                   val transactions = transactionMap[key]
+                   transactions?.forEach {
+                       list.add(it)
+                   }
+               }
+
+               Timber.d("transactions lists ${list}")
+
                emit(Result.Success(transactionResult.data))
            }else if (transactionResult is Result.Error){
                emit(Result.Error(transactionResult.exception))
