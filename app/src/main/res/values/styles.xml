@@ -32,6 +32,7 @@
         <item name="background">?selectableItemBackground</item>
         <item name="android:drawablePadding">@dimen/list_item_spacing_half</item>
         <item name="textAllCaps">false</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
 
