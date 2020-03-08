@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.memo.pay.R
@@ -11,7 +13,9 @@ import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.extensions.showSnackBar
 import com.memo.pay.ui.home.HomeViewModel
+import com.memo.pay.ui.home.MainActivity
 import com.memo.pay.utils.Constants
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_send_money.*
 import kotlinx.android.synthetic.main.fragment_send_money.tvAccountBalance
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,6 +54,7 @@ class SendMoneyFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val vavController = Navigation.findNavController(view)
+        setToolbar()
         btnNext.setOnClickListener {
             when {
                 etEnterAmount.text.toString().isEmpty() -> {
@@ -64,6 +69,16 @@ class SendMoneyFragment: Fragment() {
                     it.showSnackBar(getString(R.string.error_amount_exceeded))
                 }
             }
+        }
+    }
+
+    private fun setToolbar() {
+        val mainActivity = activity as MainActivity
+        mainActivity.toolbar_main.apply {
+            title = getString(R.string.enter_amount)
+            setTitleTextColor(ContextCompat.getColor(mainActivity, R.color.primaryTextColor))
+            setBackgroundColor(ContextCompat.getColor(mainActivity, R.color.colorPrimary))
+            findViewById<AppCompatTextView>(R.id.tvAccountIcon).visibility = View.GONE
         }
     }
 

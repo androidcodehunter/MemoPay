@@ -100,6 +100,7 @@
     <string name="send_money">Send money</string>
     <string name="more">More</string>
     <string name="enter_amount">Enter amount</string>
+    <string name="enter_amount_aed">Enter amount in AED</string>
     <string name="top_up_wallet">Top-up wallet</string>
     <string name="amount_should_not_empty">Amount should not be empty.</string>
     <string name="next">Next</string>
@@ -120,4 +121,9 @@
     <string name="notifications_general_channel_description">All notifications with a normal priority will use this channel</string>
     <string name="notifications_title_add_money">Add Money Notification</string>
     <string name="notifications_content_add_money">%s AED has been added</string>
+    <string name="family">Family</string>
+    <string name="school">School</string>
+    <string name="food">Food</string>
+    <string name="transport">Transport</string>
+    <string name="confirm_transfer">Confirm transfer</string>
 </resources>

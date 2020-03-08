@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#cccccc</color>
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorAccent">#cccccc</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
     <color name="windowBackgroundColor">#3333FF</color>
@@ -17,4 +17,5 @@
     <color name="btn_blue_pressed">#0505ff</color>
     <color name="title_color">#292A2E</color>
     <color name="caption_color">#9FA9B8</color>
+    <color name="toolbar_back">#9FA9B8</color>
 </resources>

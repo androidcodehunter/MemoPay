@@ -5,30 +5,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_main"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?android:listPreferredItemHeight"
-        android:paddingEnd="@dimen/list_item_spacing"
-        android:paddingRight="@dimen/list_item_spacing"
-        android:background="@color/windowBackgroundColor"
-        app:title="@string/memo_pay_balance"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvAccountIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="end"
-            android:background="@drawable/rounded_green"
-            android:gravity="center"
-            android:text="@string/letter_a"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/abc_text_size_medium_material" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_main"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/windowBackgroundColor"
+            android:paddingEnd="@dimen/list_item_spacing"
+            android:paddingRight="@dimen/list_item_spacing"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:theme="@style/toolbar_theme"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/memo_pay_balance">
 
-    </androidx.appcompat.widget.Toolbar>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAccountIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:background="@drawable/rounded_green"
+                android:gravity="center"
+                android:text="@string/letter_a"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/abc_text_size_medium_material" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
         android:id="@+id/nav_host_fragment"

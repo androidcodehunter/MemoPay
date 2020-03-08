@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.get
 import androidx.navigation.ui.NavigationUI
 import com.memo.pay.R
+import com.memo.pay.extensions.hideKeyboard
 import com.memo.pay.ui.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -28,17 +29,8 @@ class MainActivity : BaseActivity(){
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (navController.graph[R.id.addMoneyFragment] == navController.currentDestination){
-            toolbar_main.apply {
-                title = getString(R.string.memo_pay_balance)
-                setBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.windowBackgroundColor))
-                setTitleTextColor(ContextCompat.getColor(this@MainActivity, R.color.colorPrimary))
-            }
-            navController.navigateUp()
-        }else{
-            navController.navigateUp()
-        }
-
+        hideKeyboard()
+        navController.navigateUp()
         return super.onOptionsItemSelected(item)
     }
 

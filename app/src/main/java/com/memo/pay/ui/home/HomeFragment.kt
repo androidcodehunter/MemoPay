@@ -7,13 +7,15 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.BlendModeColorFilterCompat
+import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
-import com.memo.pay.data.db.table.Transaction
 import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -96,6 +98,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mNavController = Navigation.findNavController(view)
+
+        val mainActivity = (activity as MainActivity)
+        mainActivity.toolbar_main.apply {
+            title = getString(R.string.memo_pay_balance)
+            setTitleTextColor(ContextCompat.getColor(context, android.R.color.white))
+            setBackgroundColor(ContextCompat.getColor(mainActivity, R.color.windowBackgroundColor))
+            findViewById<AppCompatTextView>(R.id.tvAccountIcon).visibility = VISIBLE
+        }
+
         tvAddMoney.setOnClickListener {
             mNavController.navigate(R.id.action_homeFragment_to_AddMoneyFragment)
         }

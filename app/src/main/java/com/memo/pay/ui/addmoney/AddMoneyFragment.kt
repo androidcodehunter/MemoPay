@@ -1,5 +1,6 @@
 package com.memo.pay.ui.addmoney
 
+import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,10 +14,14 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.extensions.hideKeyboard
+import com.memo.pay.extensions.setColor
 import com.memo.pay.notification.BasicNotification
 import com.memo.pay.notification.NotificationChannelFactory
 import com.memo.pay.notification.NotificationFactory
@@ -31,6 +36,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class AddMoneyFragment : Fragment() {
+    private lateinit var mNavController: NavController
     private val homeViewModel: HomeViewModel by viewModel()
     private val notificationFactory: NotificationFactory by inject()
     private val notificationChannelFactory: NotificationChannelFactory by inject()
@@ -81,6 +87,7 @@ class AddMoneyFragment : Fragment() {
                 hideProgressLoading()
                 showAccount(result.data.account)
                 showAddMoneyNotification(result.data.amount)
+                mNavController.navigateUp()
             }
             is Result.Error -> {
                 hideProgressLoading()
@@ -103,6 +110,9 @@ class AddMoneyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         changeToolbarForAddMoney()
+        mNavController = Navigation.findNavController(view)
+        homeViewModel.getAccount(true, CURRENT_ACCOUNT_NUMBER).observe(viewLifecycleOwner, accountObserver)
+        homeViewModel.getAmount().observe(viewLifecycleOwner, amountObserver)
     }
 
     private fun changeToolbarForAddMoney() {
@@ -112,12 +122,7 @@ class AddMoneyFragment : Fragment() {
             setTitleTextColor(ContextCompat.getColor(mainActivity, R.color.primaryTextColor))
             setBackgroundColor(ContextCompat.getColor(mainActivity, R.color.colorPrimary))
             findViewById<AppCompatTextView>(R.id.tvAccountIcon).visibility = GONE
-            navigationIcon?.colorFilter =
-                BlendModeColorFilterCompat.createBlendModeColorFilterCompat(ContextCompat.getColor(mainActivity, R.color.darker_gray), BlendModeCompat.SRC_ATOP)
         }
-
-        homeViewModel.getAccount(true, CURRENT_ACCOUNT_NUMBER).observe(viewLifecycleOwner, accountObserver)
-        homeViewModel.getAmount().observe(viewLifecycleOwner, amountObserver)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

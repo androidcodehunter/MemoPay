@@ -10,8 +10,10 @@ import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
 import com.memo.pay.ui.home.HomeViewModel
+import com.memo.pay.ui.home.MainActivity
 import com.memo.pay.ui.sendmoney.ContactSelectionFragment.Companion.KEY_AMOUNT
 import com.memo.pay.utils.Constants
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_confirm_transfer.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -41,7 +43,6 @@ class ConfirmTransferFragment: Fragment() {
     }
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,6 +53,9 @@ class ConfirmTransferFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity).toolbar_main.apply {
+            title = getString(R.string.confirm_transfer)
+        }
         btnSendMoney.setOnClickListener {
             homeViewModel.sendMoney(amount, Constants.CURRENT_ACCOUNT_NUMBER, account).observe(viewLifecycleOwner, sendMoneyResponse)
         }

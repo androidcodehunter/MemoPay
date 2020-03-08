@@ -14,12 +14,16 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textSize="16sp"
+        android:textColor="#757F8D"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvAccountBalance"
         style="@style/TextBalanceAmount"
+        app:layout_constraintLeft_toRightOf="@id/tvAddMoneyTitle"
+        android:layout_marginTop="@dimen/margin_4dp"
         app:layout_constraintLeft_toLeftOf="@id/tvAddMoneyTitle"
         app:layout_constraintRight_toRightOf="@id/tvAddMoneyTitle"
         app:layout_constraintTop_toBottomOf="@id/tvAddMoneyTitle"/>
@@ -28,21 +32,69 @@
         android:id="@+id/etEnterAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/primaryTextColor"
         app:layout_constraintLeft_toLeftOf="@id/tvAddMoneyTitle"
         app:layout_constraintRight_toRightOf="@id/tvAddMoneyTitle"
-        android:minHeight="?android:listPreferredItemHeightLarge"
-        android:hint="@string/enter_amount"
+        android:hint="@string/enter_amount_aed"
+        android:textSize="40sp"
+        android:background="@null"
         android:inputType="numberDecimal"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginTop="?listPreferredItemHeightSmall"
         app:layout_constraintTop_toBottomOf="@id/tvAccountBalance"/>
+
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        android:layout_marginTop="?listPreferredItemHeightSmall"
+        app:singleLine="true"
+        app:singleSelection="true"
+        android:paddingLeft="@dimen/margin_32dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvAddMoneyTitle"
+        app:layout_constraintRight_toRightOf="@id/tvAddMoneyTitle"
+        app:layout_constraintTop_toBottomOf="@id/etEnterAmount">
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="?listPreferredItemHeight"
+            android:text="@string/family"/>
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="?listPreferredItemHeight"
+            android:text="@string/school"/>
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="?listPreferredItemHeight"
+            android:text="@string/food"/>
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="?listPreferredItemHeight"
+            android:gravity="center"
+            android:text="@string/transport"/>
+
+
+    </com.google.android.material.chip.ChipGroup>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnTopUP"
         style="@style/BlueButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etEnterAmount"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/margin_24dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvAddMoneyTitle"
+        app:layout_constraintRight_toRightOf="@id/tvAddMoneyTitle"
+        app:layout_constraintTop_toBottomOf="@id/chipGroup"
         android:text="@string/top_up_wallet"/>
 
 
@@ -50,7 +102,7 @@
         android:id="@+id/progressbarAddMoney"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="@dimen/cardview_default_elevation"
+        android:elevation="@dimen/defulat_margin"
         android:visibility="gone"
         android:background="@color/windowBackgroundColor"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -15,7 +15,9 @@ import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.ui.home.HomeViewModel
+import com.memo.pay.ui.home.MainActivity
 import com.memo.pay.ui.sendmoney.ConfirmTransferFragment.Companion.KEY_ACCOUNT
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_contact_selection.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
@@ -79,6 +81,9 @@ class ContactSelectionFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vavController = Navigation.findNavController(view)
+        (activity as MainActivity).toolbar_main.apply {
+            title = getString(R.string.send_money)
+        }
         setFrequentListAdapter()
         setContactAdapter()
     }
