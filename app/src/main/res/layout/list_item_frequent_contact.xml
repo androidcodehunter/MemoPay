@@ -25,9 +25,9 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivOnline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_online"
             app:layout_constraintTop_toTopOf="@id/circularProfilePic"
             app:layout_constraintRight_toRightOf="@id/circularProfilePic"/>
 

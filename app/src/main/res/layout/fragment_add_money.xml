@@ -65,7 +65,7 @@
         android:id="@+id/progressbarAddMoney"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="@dimen/defulat_margin"
+        android:elevation="@dimen/default_margin"
         android:visibility="gone"
         android:background="@color/windowBackgroundColor"
         app:layout_constraintLeft_toLeftOf="parent"

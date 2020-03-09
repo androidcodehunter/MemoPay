@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
+import com.memo.pay.extensions.hideKeyboard
 import com.memo.pay.extensions.showSnackBar
 import com.memo.pay.ui.home.HomeViewModel
 import com.memo.pay.ui.home.MainActivity
@@ -64,6 +65,7 @@ class SendMoneyFragment: Fragment() {
                     val bundle = Bundle()
                     bundle.putDouble(KEY_AMOUNT, etEnterAmount.text.toString().toDouble())
                     vavController.navigate(R.id.action_sendMoneyFragment_to_ContactSelectionFragment, bundle)
+                    hideKeyboard()
                 }
                 else -> {
                     it.showSnackBar(getString(R.string.error_amount_exceeded))

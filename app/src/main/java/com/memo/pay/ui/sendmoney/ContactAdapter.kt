@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.memo.pay.R
 import com.memo.pay.data.db.table.Account
 import kotlinx.android.synthetic.main.list_item_contact.view.*
-import kotlinx.android.synthetic.main.list_item_frequent_contact.view.*
-import kotlinx.android.synthetic.main.list_item_transaction_history.view.*
 
 const val ITEM_TYPE_TITLE = 1
 const val ITEM_TYPE_CONTACT = 2
@@ -25,7 +23,7 @@ class ContactAdapter(val onContactClickListener: (contact: Account) -> Unit) :
         return if (viewType == ITEM_TYPE_TITLE){
             TitleViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(android.R.layout.simple_list_item_1, parent, false)
+                    .inflate(R.layout.list_item_contact_label, parent, false)
             )
         }else{
             ContactViewHolder(
@@ -61,6 +59,11 @@ class ContactAdapter(val onContactClickListener: (contact: Account) -> Unit) :
 
         fun bindTo(account: Account) {
             itemView.tvContactName.text = account.name
+            if (account.isOnline){
+                itemView.ivContactOnline.setImageResource(R.drawable.ic_online)
+            }
+
+            itemView.btnFavorite.isChecked = account.isFavorite
         }
     }
 

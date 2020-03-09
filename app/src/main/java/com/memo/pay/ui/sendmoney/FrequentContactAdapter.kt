@@ -36,6 +36,9 @@ class FrequentContactAdapter (val onFrequentContactClickListener: (frequentConta
             val name = account.name.split(" ")
             itemView.tvContactFirstName.text = name[0]
             itemView.tvContactLastName.text = name[1]
+            if (account.isOnline){
+                itemView.ivOnline.setImageResource(R.drawable.ic_online)
+            }
         }
     }
 
