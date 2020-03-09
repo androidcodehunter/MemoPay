@@ -6,8 +6,10 @@
     android:background="?selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
+    android:minWidth="108dp"
+    android:minHeight="140dp"
     android:paddingRight="@dimen/list_item_spacing"
-    app:cardCornerRadius="@dimen/cardview_default_radius">
+    app:cardCornerRadius="@dimen/card_border_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -16,17 +18,35 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/circularProfilePic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_memo_pay"
+            android:layout_width="?listPreferredItemHeightSmall"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:src="@drawable/avatar_default"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvContactName"
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_online"
+            app:layout_constraintTop_toTopOf="@id/circularProfilePic"
+            app:layout_constraintRight_toRightOf="@id/circularProfilePic"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvContactFirstName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/title_color"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             app:layout_constraintTop_toBottomOf="@id/circularProfilePic"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:lines="1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvContactLastName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/balance_title"
+            app:layout_constraintTop_toBottomOf="@id/tvContactFirstName"
             app:layout_constraintLeft_toLeftOf="parent"
             android:lines="1" />
 

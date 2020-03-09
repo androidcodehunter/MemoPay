@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.memo.pay.R
 import com.memo.pay.data.db.table.Account
+import kotlinx.android.synthetic.main.list_item_contact.view.*
 import kotlinx.android.synthetic.main.list_item_frequent_contact.view.*
 import kotlinx.android.synthetic.main.list_item_transaction_history.view.*
 

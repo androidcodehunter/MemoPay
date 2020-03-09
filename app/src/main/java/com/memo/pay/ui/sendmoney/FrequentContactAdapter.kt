@@ -33,10 +33,9 @@ class FrequentContactAdapter (val onFrequentContactClickListener: (frequentConta
         }
 
         fun bindTo(account: Account) {
-            itemView.tvContactName.text = account.name
-           // itemView.tvTransactorName.text = transaction.name
-          //  itemView.tvSendReceiveStatus.text = transaction.type
-           // itemView.tvTransactionAmount.text = "${transaction.currency} ${transaction.transactionAmount}"
+            val name = account.name.split(" ")
+            itemView.tvContactFirstName.text = name[0]
+            itemView.tvContactLastName.text = name[1]
         }
     }
 
