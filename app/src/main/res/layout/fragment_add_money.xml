@@ -41,50 +41,14 @@
         android:layout_marginTop="?listPreferredItemHeightSmall"
         app:layout_constraintTop_toBottomOf="@id/tvAccountBalance"/>
 
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+    <include  android:id="@+id/chipGroup"
+        layout="@layout/chips_layout"
         android:layout_width="0dp"
         android:layout_height="?actionBarSize"
         android:layout_marginTop="?listPreferredItemHeightSmall"
-        app:singleLine="true"
-        app:singleSelection="true"
-        android:paddingLeft="@dimen/margin_32dp"
         app:layout_constraintLeft_toLeftOf="@id/tvAddMoneyTitle"
         app:layout_constraintRight_toRightOf="@id/tvAddMoneyTitle"
-        app:layout_constraintTop_toBottomOf="@id/etEnterAmount">
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:minWidth="?listPreferredItemHeight"
-            android:text="@string/family"/>
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:minWidth="?listPreferredItemHeight"
-            android:text="@string/school"/>
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:minWidth="?listPreferredItemHeight"
-            android:text="@string/food"/>
-
-        <com.google.android.material.chip.Chip
-            style="@style/Widget.MaterialComponents.Chip.Filter"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:minWidth="?listPreferredItemHeight"
-            android:gravity="center"
-            android:text="@string/transport"/>
-
-
-    </com.google.android.material.chip.ChipGroup>
+        app:layout_constraintTop_toBottomOf="@id/etEnterAmount"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
