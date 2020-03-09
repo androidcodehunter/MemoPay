@@ -18,4 +18,5 @@
     <color name="title_color">#292A2E</color>
     <color name="caption_color">#9FA9B8</color>
     <color name="toolbar_back">#9FA9B8</color>
+    <color name="balance_title">#757F8D</color>
 </resources>

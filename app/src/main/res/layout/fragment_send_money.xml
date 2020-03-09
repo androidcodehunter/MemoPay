@@ -14,7 +14,6 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         app:layout_goneMarginLeft="@dimen/activity_horizontal_margin"
         app:layout_goneMarginRight="@dimen/activity_horizontal_margin"
-        android:textColor="#757F8D"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
