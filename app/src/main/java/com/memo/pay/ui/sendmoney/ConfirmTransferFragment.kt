@@ -72,6 +72,7 @@ class ConfirmTransferFragment: Fragment() {
             amount = it
         }
         tvCreditedAmount.text = amount.toString()
+        tvProfileName.text = account.name
         Timber.d("account $account amount $amount")
     }
 

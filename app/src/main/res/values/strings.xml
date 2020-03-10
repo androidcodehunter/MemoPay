@@ -126,4 +126,5 @@
     <string name="food">Food</string>
     <string name="transport">Transport</string>
     <string name="confirm_transfer">Confirm transfer</string>
+    <string name="money_sent_confirmation_label">The money will credited to the user account\n within 3 days from the date of the transfer.</string>
 </resources>
