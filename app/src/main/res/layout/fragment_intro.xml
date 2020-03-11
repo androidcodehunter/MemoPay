@@ -2,25 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/introBackgroundImage"
-            android:layout_width="192dp"
-            android:layout_height="192dp"
-            android:layout_gravity="center"
-            android:adjustViewBounds="true"
-            android:alpha="0.30"
-            android:background="@drawable/ic_memo_pay"
-            android:scaleType="fitCenter" />
-
-
-    </FrameLayout>
 
 
     <LinearLayout
@@ -52,4 +35,13 @@
 
     </LinearLayout>
 
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/introBackgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/onboarding_three"/>
+
+    
 </FrameLayout>

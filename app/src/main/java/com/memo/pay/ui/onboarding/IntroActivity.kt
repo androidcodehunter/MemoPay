@@ -10,7 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.memo.pay.R
+import com.memo.pay.extensions.setImage
 import com.memo.pay.ui.home.MainActivity
 import kotlinx.android.synthetic.main.activity_intro.*
 

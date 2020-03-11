@@ -7,7 +7,7 @@
     <color name="secondaryTextColor">#000000</color>
     <color name="windowBackgroundColor">#3333FF</color>
     <color name="color_green">#8ACFC3</color>
-    <color name="indicator_unselected">#4D000000</color>
+    <color name="indicator_unselected">#D1DCF8</color>
     <color name="cyan">#00BCD4</color>
     <color name="orange">#FF9800</color>
     <color name="green">#4CAF50</color>
