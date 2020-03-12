@@ -18,5 +18,5 @@ fun Drawable.setColor(color: Int){
 }
 
 fun AppCompatImageView.setImage(url: String, requestOptions: RequestOptions){
-    Glide.with(context).load(url).into(this)
+    Glide.with(context).setDefaultRequestOptions(requestOptions).load(url).into(this)
 }

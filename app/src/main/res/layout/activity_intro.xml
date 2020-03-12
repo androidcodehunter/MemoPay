@@ -13,6 +13,54 @@
         android:layout_height="match_parent"
         android:paddingBottom="?attr/actionBarSize" />
 
+
+    <LinearLayout
+        android:id="@+id/introButtonContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="96dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/intro_indicator_0"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="@dimen/activity_margin_half"
+            android:layout_marginRight="@dimen/activity_margin_half"
+            android:background="@drawable/indicator_unselected" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/intro_indicator_1"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginEnd="@dimen/activity_margin_half"
+            android:layout_marginRight="@dimen/activity_margin_half"
+            android:background="@drawable/indicator_unselected" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/intro_indicator_2"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/indicator_unselected" />
+
+    </LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvIntroTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:text="Test "
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/introButtonContainer"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -38,38 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start|center"
             android:text="Skip"
-            android:textColor="@android:color/white" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/intro_indicator_0"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginEnd="@dimen/activity_margin_half"
-                android:layout_marginRight="@dimen/activity_margin_half"
-                android:background="@drawable/indicator_unselected" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/intro_indicator_1"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginEnd="@dimen/activity_margin_half"
-                android:layout_marginRight="@dimen/activity_margin_half"
-                android:background="@drawable/indicator_unselected" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/intro_indicator_2"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:background="@drawable/indicator_unselected" />
-
-        </LinearLayout>
+            android:textColor="@android:color/black" />
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -79,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|center"
             android:text="Finish"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:visibility="gone" />
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -90,13 +107,7 @@
             android:layout_gravity="end|center"
             android:padding="@dimen/activity_horizontal_margin"
             app:srcCompat="@drawable/ic_chevron_right_24dp"
-            android:tint="@android:color/white" />
+            android:tint="@android:color/black" />
     </FrameLayout>
 
-
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/cover"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></androidx.appcompat.widget.AppCompatImageView>
 </androidx.constraintlayout.widget.ConstraintLayout>
