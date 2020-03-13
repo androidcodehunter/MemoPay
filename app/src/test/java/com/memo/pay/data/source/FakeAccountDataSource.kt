@@ -36,6 +36,21 @@ class FakeAccountDataSource(var transactions: MutableList<Transaction>? = mutabl
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getFrequentContacts(): Result<List<Account>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getContacts(): Result<List<Account>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun sendMoney(transaction: Transaction): Result<Transaction> {
+        TODO("Not yet implemented")
+    }
 
 
 }

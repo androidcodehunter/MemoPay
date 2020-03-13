@@ -1,6 +1,8 @@
 package com.memo.pay.data.db
 
+import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
@@ -23,7 +25,11 @@ class TransactionDaoTest {
 
     @Before
     fun initDb(){
-        database = AppDatabase(ApplicationProvider.getApplicationContext())
+        database = Room.inMemoryDatabaseBuilder(
+            getApplicationContext(),
+            AppDatabase::class.java)
+            .allowMainThreadQueries()
+            .build()
     }
 
     @After
