@@ -1,5 +1,6 @@
 package com.memo.pay.data.db.dao
 
+import androidx.annotation.VisibleForTesting
 import androidx.room.*
 import com.memo.pay.data.db.table.Account
 
@@ -16,4 +17,9 @@ interface AccountDao{
     @Transaction
     @Query("UPDATE account SET balance =:newBalance WHERE accountNumber =:accountNumber")
     suspend fun updateBalance(newBalance: Double, accountNumber: String)
+
+    @VisibleForTesting
+    @Transaction
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveTestAccount(account: Account)
 }

@@ -6,7 +6,8 @@ import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
 
 class FakeAccountDataSource(var transactions: MutableList<Transaction>? = mutableListOf(),
-                            var accounts: MutableList<Account>? = mutableListOf()): AccountDataSource {
+                            var accounts: MutableList<Account>? = mutableListOf()):
+    AccountDataSource {
 
     override suspend fun saveAccount(account: Account) {
         accounts?.add(account)

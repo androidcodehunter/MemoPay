@@ -3,6 +3,7 @@ package com.memo.pay.data.source
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
+import com.memo.pay.data.source.AccountRepository
 import kotlinx.coroutines.runBlocking
 
 class FakeTestAccountRepository: AccountRepository {

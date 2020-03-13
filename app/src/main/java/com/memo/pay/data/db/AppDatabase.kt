@@ -18,7 +18,8 @@ abstract class AppDatabase: RoomDatabase() {
     abstract fun accountDao(): AccountDao
 
     companion object{
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile
+        private var instance: AppDatabase? = null
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance

@@ -7,6 +7,12 @@ import org.junit.Before
 import org.junit.Test
 import java.util.*
 import com.memo.pay.data.Result
+import com.memo.pay.utils.Constants.ACCOUNT_NUMBER_IMAD
+import com.memo.pay.utils.Constants.ACCOUNT_NUMBER_SHARIF
+import com.memo.pay.utils.Constants.ACCOUNT_TYPE_RECEIVED
+import com.memo.pay.utils.Constants.ACCOUNT_TYPE_SENT
+import com.memo.pay.utils.Constants.CURRENCY_AED
+import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import org.hamcrest.core.IsEqual
 import org.junit.Assert
 
@@ -16,9 +22,10 @@ class AccountRepositoryImplTest {
     private val accountImad = Account("111112", "Imad", 1001.00, "AED")
     private val accountsLocal = listOf(accountSharif, accountImad)
     private val accountsRemote = listOf(accountSharif, accountImad)
-    private val transaction1 = Transaction("1", "Sharifur", "sent", 10.00, "AED", "", Date(), "111111", "111112")
-    private val transaction2 = Transaction("2", "Imad", "sent", 10.00, "AED", "", Date(), "111111", "111112")
-    private val transaction3 = Transaction("3", "Sharifur", "sent", 10.00, "AED", "", Date(), "111111", "111112")
+
+    private val transaction1 = Transaction("Sharifur", ACCOUNT_TYPE_RECEIVED, 10.0, CURRENCY_AED, "", Date(), CURRENT_ACCOUNT_NUMBER, ACCOUNT_NUMBER_IMAD)
+    private val transaction2 = Transaction("Imad", ACCOUNT_TYPE_SENT, 10.0, CURRENCY_AED, "", Date(), CURRENT_ACCOUNT_NUMBER, ACCOUNT_NUMBER_SHARIF)
+    private val transaction3 = Transaction("Sharifur", ACCOUNT_TYPE_SENT, 10.0, CURRENCY_AED, "", Date(), CURRENT_ACCOUNT_NUMBER, ACCOUNT_NUMBER_IMAD)
     private val remoteTransactions = listOf(transaction1, transaction2, transaction3)
 
     private lateinit var accountRemoteDataSource: FakeAccountDataSource
@@ -28,9 +35,18 @@ class AccountRepositoryImplTest {
 
     @Before
     fun createRepository(){
-        accountRemoteDataSource = FakeAccountDataSource(transactions = remoteTransactions.toMutableList(), accounts = accountsRemote.toMutableList())
-        accountLocalDataSource = FakeAccountDataSource(transactions = remoteTransactions.toMutableList(), accounts = accountsLocal.toMutableList())
-        accountRepository = AccountRepositoryImpl(accountLocalDataSource, accountRemoteDataSource)
+        accountRemoteDataSource = FakeAccountDataSource(
+            transactions = remoteTransactions.toMutableList(),
+            accounts = accountsRemote.toMutableList()
+        )
+        accountLocalDataSource = FakeAccountDataSource(
+            transactions = remoteTransactions.toMutableList(),
+            accounts = accountsLocal.toMutableList()
+        )
+        accountRepository = AccountRepositoryImpl(
+            accountLocalDataSource,
+            accountRemoteDataSource
+        )
     }
 
     @Test
