@@ -1,6 +1,5 @@
 package com.memo.pay.ui.addmoney
 
-import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,21 +11,17 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.extensions.hideKeyboard
-import com.memo.pay.extensions.setColor
 import com.memo.pay.notification.BasicNotification
 import com.memo.pay.notification.NotificationChannelFactory
 import com.memo.pay.notification.NotificationFactory
 import com.memo.pay.notification.NotificationType
-import com.memo.pay.ui.home.HomeViewModel
+import com.memo.pay.ui.viewmodel.HomeViewModel
 import com.memo.pay.ui.home.MainActivity
 import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
@@ -150,7 +145,7 @@ class AddMoneyFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             AddMoneyFragment().apply {}
     }
 }

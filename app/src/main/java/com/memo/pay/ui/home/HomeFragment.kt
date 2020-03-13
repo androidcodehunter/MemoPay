@@ -7,24 +7,24 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.BlendModeColorFilterCompat
-import androidx.core.graphics.BlendModeCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
+import com.memo.pay.ui.interfaces.OnToolbarChangeListener
+import com.memo.pay.ui.viewmodel.HomeViewModel
 import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class HomeFragment : Fragment() {
+class HomeFragment(private val onToolbarChangeListener: OnToolbarChangeListener) : Fragment() {
 
-    private lateinit var mNavController: NavController
+   /// private  var mNavController: NavController? = null
     private lateinit var mTransactionAdapter:TransactionHistoryAdapter
 
     private val homeViewModel: HomeViewModel by viewModel()
@@ -51,15 +51,12 @@ class HomeFragment : Fragment() {
 
     private fun hideProgressLoading() {
         progressLoadingLayout.visibility = GONE
-        (activity as MainActivity).toolbar_main?.apply {
-            visibility = VISIBLE
-            findViewById<AppCompatTextView>(R.id.tvAccountIcon).visibility = VISIBLE
-        }
+        onToolbarChangeListener.showHideToolbar(true)
     }
 
     private fun showProgressLoading() {
         progressLoadingLayout.visibility = VISIBLE
-        (activity as MainActivity).toolbar_main.visibility = GONE
+        onToolbarChangeListener.showHideToolbar(false)
     }
 
     private val transactionsObserver = androidx.lifecycle.Observer<Result<List<Any>>>{ result ->
@@ -97,21 +94,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mNavController = Navigation.findNavController(view)
 
-        val mainActivity = (activity as MainActivity)
-        mainActivity.toolbar_main.apply {
-            title = getString(R.string.memo_pay_balance)
-            setTitleTextColor(ContextCompat.getColor(context, android.R.color.white))
-            setBackgroundColor(ContextCompat.getColor(mainActivity, R.color.windowBackgroundColor))
-            findViewById<AppCompatTextView>(R.id.tvAccountIcon).visibility = VISIBLE
-        }
+        //Directly needs to access the navcontroller as the Fragment test doesn't find it.
+        onToolbarChangeListener.onToolbarChange()
 
         tvAddMoney.setOnClickListener {
-            mNavController.navigate(R.id.action_homeFragment_to_AddMoneyFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_AddMoneyFragment)
         }
         tvSendMoney.setOnClickListener {
-            mNavController.navigate(R.id.action_homeFragment_to_sendMoneyFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_sendMoneyFragment)
         }
         tvMore.setOnClickListener {  }
     }
@@ -126,11 +117,5 @@ class HomeFragment : Fragment() {
         }
         homeViewModel.getTransactions(true, CURRENT_ACCOUNT_NUMBER).observe(viewLifecycleOwner, transactionsObserver)
         homeViewModel.getAccount(true, CURRENT_ACCOUNT_NUMBER).observe(viewLifecycleOwner, accountObserver)
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() =
-            HomeFragment().apply {}
     }
 }

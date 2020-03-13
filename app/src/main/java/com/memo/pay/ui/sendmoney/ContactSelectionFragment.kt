@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
-import com.memo.pay.ui.home.HomeViewModel
+import com.memo.pay.ui.viewmodel.HomeViewModel
 import com.memo.pay.ui.home.MainActivity
 import com.memo.pay.ui.sendmoney.ConfirmTransferFragment.Companion.KEY_ACCOUNT
 import kotlinx.android.synthetic.main.activity_main.*

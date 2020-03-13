@@ -1,4 +1,4 @@
-package com.memo.pay.ui.home
+package com.memo.pay.ui.viewmodel
 
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.*
@@ -9,10 +9,7 @@ import com.memo.pay.data.source.AccountRepository
 import com.memo.pay.utils.Constants.ACCOUNT_TYPE_SENT
 import com.memo.pay.utils.Constants.CURRENCY_AED
 import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
-import timber.log.Timber
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.time.format.DateTimeFormatter.ofPattern
 import java.util.*
 
 class HomeViewModel(private val accountRepository: AccountRepository): ViewModel() {
@@ -84,7 +81,12 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
             emit(Result.Loading)
             val accountResult = accountRepository.addMoney(amount, accountNumber)
             if (accountResult is Result.Success){
-                emit(Result.Success(AddMoney(amount, accountResult.data)))
+                emit(Result.Success(
+                    AddMoney(
+                        amount,
+                        accountResult.data
+                    )
+                ))
             }else if (accountResult is Result.Error){
                 emit(Result.Error(accountResult.exception))
             }

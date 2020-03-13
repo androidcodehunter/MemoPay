@@ -9,7 +9,7 @@ import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
-import com.memo.pay.ui.home.HomeViewModel
+import com.memo.pay.ui.viewmodel.HomeViewModel
 import com.memo.pay.ui.home.MainActivity
 import com.memo.pay.ui.sendmoney.ContactSelectionFragment.Companion.KEY_AMOUNT
 import com.memo.pay.utils.Constants
