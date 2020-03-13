@@ -22,7 +22,7 @@ import com.memo.pay.notification.NotificationChannelFactory
 import com.memo.pay.notification.NotificationFactory
 import com.memo.pay.notification.NotificationType
 import com.memo.pay.ui.viewmodel.HomeViewModel
-import com.memo.pay.ui.home.MainActivity
+import com.memo.pay.ui.MainActivity
 import com.memo.pay.utils.Constants.CURRENT_ACCOUNT_NUMBER
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_add_money.*

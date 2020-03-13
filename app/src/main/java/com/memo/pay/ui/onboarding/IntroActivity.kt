@@ -11,7 +11,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.memo.pay.R
-import com.memo.pay.ui.home.MainActivity
+import com.memo.pay.ui.MainActivity
 import com.memo.pay.utils.Constants.getIntroImages
 import kotlinx.android.synthetic.main.activity_intro.*
 

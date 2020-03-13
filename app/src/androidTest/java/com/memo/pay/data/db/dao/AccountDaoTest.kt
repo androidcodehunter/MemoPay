@@ -1,11 +1,11 @@
-package com.memo.pay.data.db
+package com.memo.pay.data.db.dao
 
 import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
+import com.memo.pay.data.db.AppDatabase
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.utils.Constants.ACCOUNT_NUMBER_IMAD
 import com.memo.pay.utils.Constants.CURRENCY_AED

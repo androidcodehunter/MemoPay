@@ -14,7 +14,7 @@ import com.memo.pay.data.db.table.Account
 import com.memo.pay.extensions.hideKeyboard
 import com.memo.pay.extensions.showSnackBar
 import com.memo.pay.ui.viewmodel.HomeViewModel
-import com.memo.pay.ui.home.MainActivity
+import com.memo.pay.ui.MainActivity
 import com.memo.pay.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_send_money.*

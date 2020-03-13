@@ -2,7 +2,6 @@ package com.memo.pay.ui.onboarding
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.memo.pay.ui.home.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

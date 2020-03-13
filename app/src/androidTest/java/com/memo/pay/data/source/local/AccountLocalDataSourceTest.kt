@@ -1,6 +1,8 @@
 package com.memo.pay.data.source.local
 
+import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
@@ -10,6 +12,7 @@ import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.succeeded
 import com.memo.pay.utils.Constants
 import com.memo.pay.utils.Constants.ACCOUNT_NUMBER_SHARIF
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.After
@@ -27,9 +30,15 @@ class AccountLocalDataSourceTest {
 
     @Before
     fun setup(){
-        database = AppDatabase(ApplicationProvider.getApplicationContext())
+        database = Room.inMemoryDatabaseBuilder(
+                getApplicationContext(),
+                AppDatabase::class.java
+            )
+            .allowMainThreadQueries()
+            .build()
+
         localDataSource =
-            AccountLocalDataSource(database)
+            AccountLocalDataSource(database, Dispatchers.Main)
     }
 
     @After

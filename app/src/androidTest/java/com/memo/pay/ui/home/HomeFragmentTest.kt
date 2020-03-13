@@ -4,11 +4,12 @@ import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.*
+import androidx.test.espresso.assertion.ViewAssertions
+import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.memo.pay.R
@@ -19,6 +20,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 
@@ -36,9 +38,12 @@ class HomeFragmentTest{
     @Test
     fun homeActivity_DisplayMemoPayBalanceInUi() = runBlocking{
 
-        val onToolbarChangeListener = mock(OnToolbarChangeListener::class.java)
-        val navController = mock(NavController::class.java)
-        val homeFragmentScenario = launchFragmentInContainer(Bundle(), R.style.AppTheme) {
+        val onToolbarChangeListener = Mockito.mock(OnToolbarChangeListener::class.java)
+        val navController = Mockito.mock(NavController::class.java)
+        val homeFragmentScenario = launchFragmentInContainer(
+            Bundle(),
+            R.style.AppTheme
+        ) {
             HomeFragment(onToolbarChangeListener)
         }
 
@@ -47,8 +52,9 @@ class HomeFragmentTest{
             it.arguments = Bundle()
         }
 
-        onView(withId(R.id.tvAccountBalance)).check(matches(isDisplayed()))
-       // onView(withId(R.id.tvAccountBalance)).check(matches(withText("AED 1500.00")))
+        Espresso.onView(ViewMatchers.withId(R.id.tvAccountBalance))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+        // onView(withId(R.id.tvAccountBalance)).check(matches(withText("AED 1500.00")))
         //Sleeping the fragment few seconds to see the ui visible.
         Thread.sleep(2000)
     }
@@ -57,7 +63,9 @@ class HomeFragmentTest{
     fun clickAddMoneyButton_navigateToAddMoneyFragment(){
         val onToolbarChangeListener = mock(OnToolbarChangeListener::class.java)
         val navController = mock(NavController::class.java)
-        val homeFragmentScenario = launchFragmentInContainer(Bundle(), R.style.AppTheme) {
+        val homeFragmentScenario = launchFragmentInContainer(Bundle(),
+            R.style.AppTheme
+        ) {
             HomeFragment(onToolbarChangeListener)
         }
 
@@ -73,7 +81,9 @@ class HomeFragmentTest{
     fun clickSendMoneyButton_navigateToSendMoneyFragment(){
         val onToolbarChangeListener = mock(OnToolbarChangeListener::class.java)
         val navController = mock(NavController::class.java)
-        val homeFragmentScenario = launchFragmentInContainer(Bundle(), R.style.AppTheme) {
+        val homeFragmentScenario = launchFragmentInContainer(Bundle(),
+            R.style.AppTheme
+        ) {
             HomeFragment(onToolbarChangeListener)
         }
 

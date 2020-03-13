@@ -1,4 +1,4 @@
-package com.memo.pay.ui.home
+package com.memo.pay.ui
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.memo.pay.R
 import com.memo.pay.extensions.hideKeyboard
-import com.memo.pay.ui.BaseActivity
+import com.memo.pay.ui.home.HomeFragment
 import com.memo.pay.ui.interfaces.OnToolbarChangeListener
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -74,7 +74,9 @@ class MainActivity : BaseActivity(), OnToolbarChangeListener {
             classLoader: ClassLoader,
             className: String
         ) = when (className) {
-            HomeFragment::class.java.name -> HomeFragment(onToolbarChangeListener)
+            HomeFragment::class.java.name -> HomeFragment(
+                onToolbarChangeListener
+            )
             else -> super.instantiate(classLoader, className)
         }
     }

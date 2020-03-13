@@ -15,7 +15,7 @@ import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.ui.viewmodel.HomeViewModel
-import com.memo.pay.ui.home.MainActivity
+import com.memo.pay.ui.MainActivity
 import com.memo.pay.ui.sendmoney.ConfirmTransferFragment.Companion.KEY_ACCOUNT
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_contact_selection.*

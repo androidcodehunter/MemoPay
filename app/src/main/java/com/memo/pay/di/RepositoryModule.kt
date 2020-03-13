@@ -1,7 +1,7 @@
 package com.memo.pay.di
 
+import android.content.Context
 import com.memo.pay.data.db.AppDatabase
-import com.memo.pay.data.source.AccountDataSource
 import com.memo.pay.data.source.AccountRepositoryImpl
 import com.memo.pay.data.source.local.AccountLocalDataSource
 import com.memo.pay.data.source.remote.AccountRemoteDataSource
@@ -10,12 +10,11 @@ import org.koin.dsl.module
 
 val repositoryModule = module {
     factory { AccountLocalDataSource(get()) }
-    factory { AccountRemoteDataSource(AppDatabase(androidContext())) }
-    factory { AppDatabase(androidContext()) }
-    factory {
-        AccountRepositoryImpl(
-            get() as AccountLocalDataSource,
-            get() as AccountRemoteDataSource
-        )
-    }
+    factory { AccountRemoteDataSource(get()) }
+    factory { provideDatabase(androidContext()) }
+    single { AccountRepositoryImpl(get() as AccountLocalDataSource, get() as AccountRemoteDataSource) }
+}
+
+fun provideDatabase(androidContext: Context): AppDatabase {
+    return AppDatabase(androidContext)
 }
