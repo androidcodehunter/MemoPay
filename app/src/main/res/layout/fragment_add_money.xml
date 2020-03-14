@@ -34,7 +34,7 @@
         app:layout_constraintLeft_toLeftOf="@id/tvAddMoneyTitle"
         app:layout_constraintRight_toRightOf="@id/tvAddMoneyTitle"
         android:hint="@string/enter_amount_aed"
-        android:textSize="40sp"
+        android:textSize="36sp"
         android:background="@null"
         android:inputType="numberDecimal"
         android:layout_marginTop="?listPreferredItemHeightSmall"

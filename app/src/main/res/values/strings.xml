@@ -130,4 +130,11 @@
     <string name="intro_connect_bank_account">Connect your bank account</string>
     <string name="intro_send_money_instantly">Send money instantly</string>
     <string name="intro_no_fees">No Fees, no IBANS, no Cash</string>
+    <string name="sending_your_funds">Sending your funds...</string>
+    <string name="try_again">Try again</string>
+    <string name="send_money_failed">Send money failed!!</string>
+    <string name="sorry_we_coudn_t_send_money_please_try_again">Sorry we coudn\'t send money. \n Please try again</string>
+    <string name="go_to_dashboard">Go to dashboard</string>
+    <string name="sent_success_message">"You send AED %s  to \n %s "</string>
+    <string name="money_sent_caption">Money will be credited to the account within 12 hours. If it doesn’t happen, contact support.</string>
 </resources>

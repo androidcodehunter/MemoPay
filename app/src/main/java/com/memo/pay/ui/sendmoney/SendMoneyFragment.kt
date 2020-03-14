@@ -17,7 +17,9 @@ import com.memo.pay.ui.viewmodel.HomeViewModel
 import com.memo.pay.ui.MainActivity
 import com.memo.pay.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_add_money.*
 import kotlinx.android.synthetic.main.fragment_send_money.*
+import kotlinx.android.synthetic.main.fragment_send_money.etEnterAmount
 import kotlinx.android.synthetic.main.fragment_send_money.tvAccountBalance
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,16 +29,24 @@ class SendMoneyFragment: Fragment() {
     private val accountObserver = androidx.lifecycle.Observer<Result<Account>>{ result ->
         when (result) {
             is Result.Loading -> {
-                //showProgressLoading()
+                showProgressLoading()
             }
             is Result.Success -> {
-                ///hideProgressLoading()
+                hideProgressLoading()
                 showAccount(result.data)
             }
             is Result.Error -> {
-                ///hideProgressLoading()
+                hideProgressLoading()
             }
         }
+    }
+
+    private fun hideProgressLoading() {
+        progressbarSendMoney.visibility = View.GONE
+    }
+
+    private fun showProgressLoading() {
+        progressbarSendMoney.visibility = View.VISIBLE
     }
 
     private fun showAccount(account: Account) {

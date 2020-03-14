@@ -33,8 +33,8 @@ class HomeFragmentTest{
     @Test
     fun homeActivity_DisplayMemoPayBalanceInUi() = runBlocking{
 
-        val onToolbarChangeListener = Mockito.mock(OnToolbarChangeListener::class.java)
-        val navController = Mockito.mock(NavController::class.java)
+        val onToolbarChangeListener = mock(OnToolbarChangeListener::class.java)
+        val navController = mock(NavController::class.java)
         val homeFragmentScenario = launchFragmentInContainer(
             Bundle(),
             R.style.AppTheme
@@ -47,11 +47,8 @@ class HomeFragmentTest{
             it.arguments = Bundle()
         }
 
-        Espresso.onView(ViewMatchers.withId(R.id.tvAccountBalance))
+        onView(withId(R.id.tvAccountBalance))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        // onView(withId(R.id.tvAccountBalance)).check(matches(withText("AED 1500.00")))
-        //Sleeping the fragment few seconds to see the ui visible.
-        ///Thread.sleep(2000)
     }
 
     @Test

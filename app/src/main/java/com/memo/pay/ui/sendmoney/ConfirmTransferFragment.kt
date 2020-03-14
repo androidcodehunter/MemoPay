@@ -3,6 +3,8 @@ package com.memo.pay.ui.sendmoney
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.memo.pay.R
@@ -29,17 +31,36 @@ class ConfirmTransferFragment: Fragment() {
 
         when (result) {
             is Result.Loading -> {
-                ///showProgressLoading()
+                showProcessing()
             }
             is Result.Success -> {
-                //hideProgressLoading()
-                ///showFrequentContacts(result.data)
+                hideProcessing()
+                fundTransferSuccess(result.data)
             }
             is Result.Error -> {
-                //hideProgressLoading()
-                ///showError()
+                hideProcessing()
+                fundTransferError()
             }
         }
+    }
+
+    private fun fundTransferError() {
+        sendMoneyErrorContainer.visibility = VISIBLE
+        sendMoneySuccessContainer.visibility = GONE
+    }
+
+    private fun fundTransferSuccess(data: Transaction) {
+        sendMoneyErrorContainer.visibility = GONE
+        sendMoneySuccessContainer.visibility = VISIBLE
+        tvSuccess.text = getString(R.string.sent_success_message).format(data.transactionAmount.toString(), account.name)
+    }
+
+    private fun hideProcessing() {
+        sendMoneyProcessingContainer.visibility = GONE
+    }
+
+    private fun showProcessing() {
+        sendMoneyProcessingContainer.visibility = VISIBLE
     }
 
 

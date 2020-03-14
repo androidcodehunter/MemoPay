@@ -25,6 +25,7 @@ import org.koin.test.AutoCloseKoinTest
 import org.koin.test.inject
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.memo.pay.R
+import com.memo.pay.ui.MainActivity
 
 
 @RunWith(AndroidJUnit4::class)

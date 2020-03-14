@@ -1,45 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<com.google.android.material.chip.ChipGroup xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/chipGroup"
+    android:fillViewport="true"
     android:layout_width="0dp"
-    android:layout_height="?actionBarSize"
-    app:singleLine="true"
-    app:singleSelection="true"
-    android:paddingLeft="@dimen/margin_32dp"
-    tools:showIn="@layout/fragment_add_money">
+    android:scrollbars="none"
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.chip.Chip
-        style="@style/Widget.MaterialComponents.Chip.Filter"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:minWidth="?listPreferredItemHeight"
-        android:text="@string/family" />
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="0dp"
+        android:layout_height="?actionBarSize"
+        app:singleLine="true"
+        app:singleSelection="true"
+        tools:showIn="@layout/fragment_add_money">
 
-    <com.google.android.material.chip.Chip
-        style="@style/Widget.MaterialComponents.Chip.Filter"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:minWidth="?listPreferredItemHeight"
-        android:text="@string/school" />
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="?listPreferredItemHeight"
+            android:text="@string/family" />
 
-    <com.google.android.material.chip.Chip
-        style="@style/Widget.MaterialComponents.Chip.Filter"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:minWidth="?listPreferredItemHeight"
-        android:text="@string/food" />
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="?listPreferredItemHeight"
+            android:text="@string/school" />
 
-    <com.google.android.material.chip.Chip
-        style="@style/Widget.MaterialComponents.Chip.Filter"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:minWidth="?listPreferredItemHeight"
-        android:gravity="center"
-        android:text="@string/transport" />
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:minWidth="?listPreferredItemHeight"
+            android:text="@string/food" />
+
+        <com.google.android.material.chip.Chip
+            style="@style/Widget.MaterialComponents.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:minWidth="?listPreferredItemHeight"
+            android:text="@string/transport" />
 
 
-</com.google.android.material.chip.ChipGroup>
+    </com.google.android.material.chip.ChipGroup>
+</HorizontalScrollView>
