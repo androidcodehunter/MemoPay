@@ -27,7 +27,7 @@ class SlidingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*TODO Setting DiskCacheStrategy.ALL we request glide to cache the image in file/disk. */
+        /*TODO Setting DiskCacheStrategy.ALL we request glide to cache the image in file/disk. So that in future the images get cached.  */
         val requestOptions = RequestOptions()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .error(R.drawable.onboarding_three)

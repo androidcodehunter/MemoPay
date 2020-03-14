@@ -3,6 +3,8 @@ package com.memo.pay.ui.sendmoney
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -31,17 +33,25 @@ class ContactSelectionFragment: Fragment() {
     private val frequentContactObserver = androidx.lifecycle.Observer<Result<List<Account>>>{ result ->
         when (result) {
             is Result.Loading -> {
-                ///showProgressLoading()
+                showProgressLoading()
             }
             is Result.Success -> {
-                //hideProgressLoading()
+                hideProgressLoading()
                 showFrequentContacts(result.data)
             }
             is Result.Error -> {
-                //hideProgressLoading()
-                ///showError()
+                hideProgressLoading()
             }
         }
+    }
+
+    private fun hideProgressLoading() {
+        progressbarContactLoading.visibility = GONE
+
+    }
+
+    private fun showProgressLoading() {
+        progressbarContactLoading.visibility = VISIBLE
     }
 
     private fun showFrequentContacts(frequentContacts: List<Account>) {
@@ -52,14 +62,14 @@ class ContactSelectionFragment: Fragment() {
     private val contactObserver = androidx.lifecycle.Observer<Result<List<Any>>>{ result ->
         when (result) {
             is Result.Loading -> {
-               // showProgressLoading()
+                showProgressLoading()
             }
             is Result.Success -> {
-                ///hideProgressLoading()
+                hideProgressLoading()
                 showContacts(result.data)
             }
             is Result.Error -> {
-                ///hideProgressLoading()
+                hideProgressLoading()
                 ///showError()
             }
         }

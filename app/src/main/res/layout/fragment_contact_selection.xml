@@ -3,15 +3,15 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/fragment_background"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin">
+        android:background="@color/fragment_background">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="?listPreferredItemHeight"
             android:layout_marginTop="@dimen/margin_32dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="@null"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:drawablePadding="@dimen/list_item_spacing_half"
@@ -25,6 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="@string/frequent"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="#292A2E"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -35,6 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/list_item_spacing_half"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:orientation="horizontal"
             android:nestedScrollingEnabled="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -44,6 +48,8 @@
             android:id="@+id/tvSendMoneyOption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/list_item_spacing"
             android:text="@string/you_can_also_send_money_by"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
@@ -57,6 +63,8 @@
             android:layout_marginTop="@dimen/list_item_spacing_half"
             android:background="@drawable/bg_round_white"
             android:text="@string/share_a_magic_link"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:textAllCaps="false"
             app:layout_constraintTop_toBottomOf="@id/tvSendMoneyOption" />
 
@@ -65,6 +73,8 @@
             android:layout_width="match_parent"
             android:layout_height="?listPreferredItemHeightSmall"
             android:layout_marginTop="@dimen/list_item_spacing_half"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:background="@drawable/bg_round_white"
             android:text="@string/send_via_tap"
             android:textAllCaps="false"
@@ -75,10 +85,31 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/list_item_spacing"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:clipToPadding="false"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnSendViaOtp" />
+    
+
+    <FrameLayout
+        android:id="@+id/progressbarContactLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="@dimen/default_margin"
+        android:visibility="gone"
+        android:background="@color/windowBackgroundColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
