@@ -7,6 +7,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.memo.pay.R
 import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
@@ -79,6 +80,10 @@ class ConfirmTransferFragment: Fragment() {
         }
         btnSendMoney.setOnClickListener {
             homeViewModel.sendMoney(amount, Constants.CURRENT_ACCOUNT_NUMBER, account).observe(viewLifecycleOwner, sendMoneyResponse)
+        }
+
+        btnGotoDashBoard.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_confirmTransferFragment_to_homeFragment)
         }
     }
 

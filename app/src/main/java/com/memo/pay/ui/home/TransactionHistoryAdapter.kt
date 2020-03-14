@@ -64,9 +64,9 @@ class TransactionHistoryAdapter(val onTransactionItemClickListener: (transaction
             itemView.tvSendReceiveStatus.text = transaction.type
             itemView.tvTransactionAmount.text = "${transaction.currency} ${transaction.transactionAmount}"
             if (transaction.type == ACCOUNT_TYPE_SENT){
-                itemView.imgTransactionType.setImageResource(R.drawable.ic_sent)
+                itemView.imgTransactionType.setImageResource(R.drawable.avatar_default)
             }else{
-                itemView.imgTransactionType.setImageResource(R.drawable.ic_receive)
+                itemView.imgTransactionType.setImageResource(R.drawable.avatar_default)
             }
         }
     }

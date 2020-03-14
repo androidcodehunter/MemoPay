@@ -40,10 +40,17 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
         transaction = Transaction( "Sharifur", ACCOUNT_TYPE_SENT, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
         transaction.id = 3
         addTransaction(transaction)
-        transaction = Transaction( "Sharifur", ACCOUNT_TYPE_RECEIVED, 10.00, "AED", "", Date(), CURRENT_ACCOUNT_NUMBER, "1111111111")
+        transaction = Transaction( "Sharifur", ACCOUNT_TYPE_RECEIVED, 10.00, "AED", "", getDaysAgo(1), CURRENT_ACCOUNT_NUMBER, "1111111111")
         transaction.id = 4
         addTransaction(transaction)
     }
+
+    private fun getDaysAgo(daysAgo: Int): Date {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DAY_OF_YEAR, -daysAgo)
+        return calendar.time
+    }
+
 
     private fun addTransaction(transaction: Transaction) {
         Timber.d("transaction id ${transaction.id} transactions ${transaction}")

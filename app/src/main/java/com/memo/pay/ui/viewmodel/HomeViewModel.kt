@@ -127,7 +127,6 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         val transaction = Transaction(receiverAccount.name, ACCOUNT_TYPE_SENT, amount, CURRENCY_AED, receiverAccount.profilePic, Date(), CURRENT_ACCOUNT_NUMBER, receiverAccount.accountNumber)
         return liveData {
             emit(Result.Loading)
-            delay(10000)
             val sendMoneyResponse = accountRepository.sendMoney(transaction)
             if (sendMoneyResponse is Result.Success){
                 emit(Result.Success(sendMoneyResponse.data))
