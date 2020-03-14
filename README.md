@@ -12,4 +12,12 @@ Room for cache management<br>
 
 <h1>Testing:</h1><br>
 For testing purpose the app used mockito, espresso, coroutine test and junit<br>
-Some basic unit & instrumentation test is performed to checkthe functionality. 
+Some basic unit & instrumentation test is performed to check the functionality thoroughly. 
+
+<h1>Local Cache/Database:</h1><br>
+Two table is used to store account and transaction related information which is 
+
+class Account(@PrimaryKey accountNumber, name, balance, currency, isFavorite, isOnline, profilePic)
+Transaction(@PrimaryKey id, name, type, transactionAmount, currency, profileUrl, date, senderAccountNumber, receiverAccountNumber)
+
+For more information check the project implementation. 
