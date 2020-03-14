@@ -91,7 +91,9 @@ class FakeAccountRepository: AccountRepository {
     }
 
     override suspend fun saveTransactions(transactions: List<Transaction>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        transactions.forEach {
+            saveTransaction(it)
+        }
     }
 
 }
