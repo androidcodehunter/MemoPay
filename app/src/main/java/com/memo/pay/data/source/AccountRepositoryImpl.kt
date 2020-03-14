@@ -70,5 +70,17 @@ class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSourc
         return transactionResponse
     }
 
+    override suspend fun saveAccount(account: Account) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun saveTransaction(transaction: Transaction) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun saveTransactions(transactions: List<Transaction>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
 
 }

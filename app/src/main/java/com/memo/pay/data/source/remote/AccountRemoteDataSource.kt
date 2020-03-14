@@ -59,6 +59,9 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
         val allTransactions = TRANSACTIONS_SERVICE_DATA.values.toList()
         val transactionsByAccount = allTransactions.filter{ it.senderAccountNumber == accountNumber }.toList()
         delay(SERVICE_LATENCY_IN_MILLIS)
+        if (transactionsByAccount.isNullOrEmpty()){
+            return Error(Exception("No Transactions Available"))
+        }
         return Success(transactionsByAccount)
     }
 

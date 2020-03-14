@@ -67,6 +67,10 @@ class MainActivityTest: AutoCloseKoinTest(){
 
     @Test
     fun sendMoneyFlowTest(){
+        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
+        onView(withId(R.id.tvSendMoney)).perform(click())
+        onView(withId(R.id.etEnterAmount)).perform(replaceText("10.00"))
+
 
     }
 
