@@ -3,7 +3,7 @@ package com.memo.pay.notification
 import android.app.PendingIntent
 import androidx.annotation.DrawableRes
 
-
+/*TODO different types of notification template using sealed class*/
 sealed class NotificationTemplate(
     val channelId: String,
     val title: String,

@@ -3,7 +3,7 @@ package com.memo.pay.data
 import com.memo.pay.data.Result.Success
 
 /**
- * A generic class that holds a value with its loading status.
+ * TODO A generic class that holds a value with its loading status which acts as a api wrapper.
  * @param <T>
  */
 sealed class Result<out R> {

@@ -5,6 +5,7 @@ import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
 import timber.log.Timber
 
+/*TODO account repository which communicates with ViewModel for providing all kinds of account, transaction related information. */
 class AccountRepositoryImpl(private val accountLocalDataSource: AccountDataSource,
                             private val accountRemoteDataSource: AccountDataSource) :
     AccountRepository {

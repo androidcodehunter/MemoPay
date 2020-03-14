@@ -30,7 +30,7 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         }
         return false
     }
-
+    /*TODO getTransactions check through downstream*/
     fun getTransactions(forceReload: Boolean, accountNumber: String): LiveData<Result<List<Any>>> {
        return liveData {
            emit(Result.Loading)
@@ -56,7 +56,7 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         }
     }
 
-
+    /*TODO getAccount check through downstream*/
     fun getAccount(forceReload: Boolean, accountNumber: String): LiveData<Result<Account>> {
         return liveData {
             emit(Result.Loading)
@@ -77,6 +77,7 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
 
     fun getAmount() = amountLiveData
 
+    /*TODO addMoney check through downstream*/
     fun addMoney(amount: Double, accountNumber: String): LiveData<Result<AddMoney>> {
         return liveData {
             emit(Result.Loading)
@@ -105,7 +106,7 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
             }
         }
     }
-
+    /*TODO getContacts check through downstream*/
     fun getContacts(favContactTitle: String, otherContactTitle: String): LiveData<Result<List<Any>>> {
         return liveData {
             emit(Result.Loading)
@@ -123,6 +124,7 @@ class HomeViewModel(private val accountRepository: AccountRepository): ViewModel
         }
     }
 
+    /*TODO send money check through downstream*/
     fun sendMoney(amount: Double, senderAccountNumber: String, receiverAccount: Account): LiveData<Result<Transaction>> {
         val transaction = Transaction(receiverAccount.name, ACCOUNT_TYPE_SENT, amount, CURRENCY_AED, receiverAccount.profilePic, Date(), CURRENT_ACCOUNT_NUMBER, receiverAccount.accountNumber)
         return liveData {

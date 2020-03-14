@@ -16,7 +16,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-/*TODO Check all the test related to @AccountDao*/
+
 @RunWith(AndroidJUnit4::class)
 @SmallTest
 class AccountDaoTest {
@@ -35,6 +35,7 @@ class AccountDaoTest {
     @After
     fun closeDb() = database.close()
 
+    /*TODO Check saveAccountAndGetByAccountNumber for @AccountDao*/
     @Test
     fun saveAccountAndGetByAccountNumber() = runBlocking {
         val accountDao = database.accountDao()
@@ -51,7 +52,7 @@ class AccountDaoTest {
         assertThat(savedAccount.name, `is`(account.name))
     }
 
-
+    /*TODO Check saveAccountAndUpdateBalanceThenCheckByAccountNumber for @AccountDao*/
     @Test
     fun saveAccountAndUpdateBalanceThenCheckByAccountNumber() = runBlocking{
         val accountDao = database.accountDao()

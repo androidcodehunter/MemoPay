@@ -18,7 +18,7 @@ class MemoPayApp : Application(){
         startKoinForDependency()
     }
 
-    /**
+    /**TODO starting Dependency injection for common objects.
      * Initialize all dependencies here.
      * All dependency related code available in @di package.
      */

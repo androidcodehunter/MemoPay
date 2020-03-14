@@ -9,7 +9,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.memo.pay.R
 
-/*TODO Notification factory class to create all kinds of notification. {@link NotificationTemplate} using NotificationTemplate you can achieve all kinds of notification */
+/*TODO Notification factory class to create all kinds of notification. {@link NotificationTemplate} using NotificationTemplate you can achieve all kinds of notification. This will be used throughout the application using dipendency injection  */
 class NotificationFactory(val context: Context) {
 
     private fun createNotification(model: NotificationTemplate): Notification {

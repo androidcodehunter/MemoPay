@@ -9,7 +9,7 @@ import com.memo.pay.data.db.dao.AccountDao
 import com.memo.pay.data.db.dao.TransactionDao
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
-
+/*TODO singleton database class using room for storing local data. */
 @Database(entities = [Account::class, Transaction::class], version = 1, exportSchema = false)
 @TypeConverters(DateTypeConverter::class)
 abstract class AppDatabase: RoomDatabase() {

@@ -19,8 +19,8 @@ import java.util.*
 import kotlin.collections.LinkedHashMap
 
 /*TODO fake api calling delay time in millis. */
-private const val SERVICE_LATENCY_IN_MILLIS = 15000L
-
+private const val SERVICE_LATENCY_IN_MILLIS = 150L
+/*TODO AccountRemoteDataSource which acts as a backend api to simulate all kinds of account, transaction related data response. */
 class AccountRemoteDataSource(private val appDatabase: AppDatabase,
                               private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AccountDataSource {
 
@@ -61,6 +61,7 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
         ACCOUNT_SERVICE_DATA[account.accountNumber] = account
     }
 
+    /*TODO simulates getTransactionsHistory from remote api*/
     override suspend fun getTransactionsHistory(accountNumber: String): Result<List<Transaction>> {
         // Simulate network by delaying the execution.
         val allTransactions = TRANSACTIONS_SERVICE_DATA.values.toList()
@@ -71,7 +72,7 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
         }
         return Success(transactionsByAccount)
     }
-
+    /*TODO simulates getAccount from remote api*/
     override suspend fun getAccount(accountNumber: String): Result<Account> {
         // Simulate network by delaying the execution.
         delay(SERVICE_LATENCY_IN_MILLIS)
@@ -89,6 +90,7 @@ class AccountRemoteDataSource(private val appDatabase: AppDatabase,
         TRANSACTIONS_SERVICE_DATA[transaction.id] = transaction
     }
 
+    /*TODO fake send money through api*/
     override suspend fun sendMoney(transaction: Transaction): Result<Transaction> = withContext(ioDispatcher){
         delay(SERVICE_LATENCY_IN_MILLIS)
         //update the local account

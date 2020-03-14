@@ -17,6 +17,7 @@ import java.util.*
 const val ITEM_TYPE_TRANSACTION = 1
 const val ITEM_TYPE_DATE = 2
 
+/*TODO viewholder pattern to show the transactions list with ListAdapter and Comparator*/
 class TransactionHistoryAdapter(val onTransactionItemClickListener: (transaction: Transaction) -> Unit) : ListAdapter<Any, RecyclerView.ViewHolder>(TRANSACTION_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -64,9 +65,9 @@ class TransactionHistoryAdapter(val onTransactionItemClickListener: (transaction
             itemView.tvSendReceiveStatus.text = transaction.type
             itemView.tvTransactionAmount.text = "${transaction.currency} ${transaction.transactionAmount}"
             if (transaction.type == ACCOUNT_TYPE_SENT){
-                itemView.imgTransactionType.setImageResource(R.drawable.avatar_default)
+                itemView.imgTransactionType.setImageResource(R.drawable.ic_sent)
             }else{
-                itemView.imgTransactionType.setImageResource(R.drawable.avatar_default)
+                itemView.imgTransactionType.setImageResource(R.drawable.ic_receive)
             }
         }
     }
@@ -79,6 +80,7 @@ class TransactionHistoryAdapter(val onTransactionItemClickListener: (transaction
 
     }
 
+    /*TODO comparator for DiffUtils check*/
     companion object {
         /**
          * Transaction comparator to check for new data updates only, it will ignore duplicate data update.

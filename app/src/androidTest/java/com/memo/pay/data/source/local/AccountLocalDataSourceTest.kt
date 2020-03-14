@@ -46,6 +46,7 @@ class AccountLocalDataSourceTest {
         database.close()
     }
 
+    /*TODO test case to check save account and retrieve account*/
     @Test
     fun saveAccount_retrievesAccount() = runBlocking{
         //Save account information
@@ -60,67 +61,4 @@ class AccountLocalDataSourceTest {
         assertThat(accountResult.data.currency, `is`(account.currency))
     }
 
-    @Test
-    fun saveTransactions_retrieveTransactions() = runBlocking{
-
-    }
-
-
-
-    /*  override suspend fun getTransactionsHistory(accountNumber: String): Result<List<Transaction>> = withContext(ioDispatcher){
-        return@withContext try {
-            Success(appDatabase.transactionDao().getTransactions(accountNumber))
-        } catch (e: Exception) {
-            Error(e)
-        }
-    }
-
-    override suspend fun getAccount(accountNumber: String): Result<Account> = withContext(ioDispatcher){
-        try {
-            val account = appDatabase.accountDao().getAccount(accountNumber)
-            return@withContext Success(account)
-        } catch (e: Exception) {
-            return@withContext Error(e)
-        }
-    }
-
-    override suspend fun saveAccount(account: Account) {
-        appDatabase.accountDao().saveAccount(account)
-    }
-
-    override suspend fun saveTransaction(transaction: Transaction) {
-        appDatabase.transactionDao().saveTransaction(transaction)
-    }
-
-    override suspend fun saveTransactions(transactions: List<Transaction>) {
-        appDatabase.transactionDao().saveTransactions(transactions)
-    }
-
-    override suspend fun addMoney(amount: Double, accountNumber: String): Result<Account> = withContext(ioDispatcher){
-        appDatabase.accountDao().updateBalance(amount, accountNumber)
-        try {
-            val account = appDatabase.accountDao().getAccount(accountNumber)
-            return@withContext Success(account)
-        } catch (e: Exception) {
-            return@withContext Error(e)
-        }
-    }
-
-    override suspend fun getFrequentContacts(): Result<List<Account>> {
-        return Error(Exception())
-    }
-
-    override suspend fun getContacts(): Result<List<Account>> {
-        return Error(Exception())
-    }
-
-    override suspend fun sendMoney(transaction: Transaction): Result<Transaction> = withContext(ioDispatcher){
-        appDatabase.transactionDao().saveTransaction(transaction)
-        try {
-            return@withContext Success(transaction)
-        }catch (e: Exception){
-            return@withContext Error(e)
-        }
-    }
-*/
 }

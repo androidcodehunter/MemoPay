@@ -40,7 +40,7 @@ class AccountRepositoryImplTest {
     fun createRepository(){
         accountRepository = FakeAccountRepository()
     }
-
+    /*TODO saveAndRetrieveAccountInfoTest using fake repository with success message using existing account*/
     @ExperimentalCoroutinesApi
     @Test
     fun saveAndRetrieveAccountInfoTest() = mainCoroutineRule.runBlockingTest{
@@ -57,7 +57,7 @@ class AccountRepositoryImplTest {
         ///assertthat(result).isInstanceOf(Result.Error::class.java)
     }
 
-
+    /*TODO getTransactions fake repository with success message using existing account*/
     @ExperimentalCoroutinesApi
     @Test
     fun getTransactions_requestAllTransactionFromSavedState() = mainCoroutineRule.runBlockingTest{
@@ -66,7 +66,7 @@ class AccountRepositoryImplTest {
         Assert.assertThat(transactions.data, IsEqual(ransactions))
     }
 
-    /*TODO check transaction error using unknown account through fake repository*/
+
     @ExperimentalCoroutinesApi
     @Test
     fun getTransactionsWithError() = mainCoroutineRule.runBlockingTest{
@@ -75,14 +75,14 @@ class AccountRepositoryImplTest {
         ///Assert.assertThat(transactions.data, IsEqual(ransactions))
     }
 
-    /*TODO add money scenario test through fake repository with success message using existing account*/
+
     @ExperimentalCoroutinesApi
     @Test
     fun addMoneyCurrentBalanceIncreaseTest() = mainCoroutineRule.runBlockingTest{
 
     }
 
-    /*TODO add money scenario test through fake repository with error message using wrong account*/
+
     @ExperimentalCoroutinesApi
     @Test
     fun addMoneyCurrentBalanceIncreaseErrorTestWithUnknownAccount() = mainCoroutineRule.runBlockingTest{
@@ -90,13 +90,11 @@ class AccountRepositoryImplTest {
     }
 
 
-    /*TODO send money scenario test through fake repository*/
     @Test
     fun sendMoneyCurrentBalanceDecreaseTest() = mainCoroutineRule.runBlockingTest{
 
     }
 
-    /*TODO send money scenario test through fake repository with error message using unknown account*/
     @Test
     fun sendMoneyCurrentBalanceDecreaseErrorTestWithUnknownAccount() = mainCoroutineRule.runBlockingTest{
 

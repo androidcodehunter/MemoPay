@@ -6,7 +6,7 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.memo.pay.R
-
+/*TODO notification factory builder class to build all types of notification*/
 @RequiresApi(Build.VERSION_CODES.O)
 class NotificationChannelFactory constructor(val context: Context) {
 
