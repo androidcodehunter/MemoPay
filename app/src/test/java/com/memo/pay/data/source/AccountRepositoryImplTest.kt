@@ -46,7 +46,7 @@ class AccountRepositoryImplTest {
     fun saveAndRetrieveAccountInfoTest() = mainCoroutineRule.runBlockingTest{
         accountRepository.saveAccount(accountSharif)
         val accountResponse = accountRepository.getAccount(true, accountSharif.accountNumber) as Result.Success
-        Assert.assertThat(accountResponse.data, IsEqual(accountImad))
+        Assert.assertThat(accountResponse.data, IsEqual(accountSharif))
     }
 
     @ExperimentalCoroutinesApi

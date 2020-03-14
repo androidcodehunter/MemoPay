@@ -1,16 +1,17 @@
 package com.memo.pay.ui.home
 
-import com.memo.pay.LiveDataTestUtil
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.memo.pay.MainCoroutineRule
+import com.memo.pay.data.Result
 import com.memo.pay.data.db.table.Account
 import com.memo.pay.data.db.table.Transaction
 import com.memo.pay.data.source.FakeAccountRepository
+import com.memo.pay.getOrAwaitValue
 import com.memo.pay.ui.viewmodel.HomeViewModel
 import com.memo.pay.utils.Constants
 import com.memo.pay.utils.Constants.ACCOUNT_NUMBER_IMAD
 import com.memo.pay.utils.Constants.ACCOUNT_NUMBER_SHARIF
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineContext
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
@@ -28,38 +29,36 @@ class HomeViewModelTest{
 
     private lateinit var accountRepository: FakeAccountRepository
     private lateinit var homeViewModel: HomeViewModel
+
     @ExperimentalCoroutinesApi
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
+    // Executes each task synchronously using Architecture Components.
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
 
+    @ExperimentalCoroutinesApi
     @Before
-    fun setupViewModel() = mainCoroutineRule.runBlockingTest{
+    fun setupViewModel() =mainCoroutineRule.runBlockingTest{
 
         accountRepository = FakeAccountRepository()
-        //Save all initial accounts
-        accountRepository.saveAccount(accountSharif)
-        accountRepository.saveAccount(accountImad)
-        //Save all initial transactions
-        accountRepository.saveTransactions(ransactions)
+
+
+            //Save all initial accounts
+            accountRepository.saveAccount(accountSharif)
+            accountRepository.saveAccount(accountImad)
+            //Save all initial transactions
+            accountRepository.saveTransactions(ransactions)
 
         homeViewModel = HomeViewModel(accountRepository)
     }
 
+    @ExperimentalCoroutinesApi
     @Test
-    fun saveAccount_showAccountInformation() = mainCoroutineRule.runBlockingTest{
+    fun getMyAccountByAccountNumber() = mainCoroutineRule.runBlockingTest{
         val account = homeViewModel.getAccount(true, ACCOUNT_NUMBER_SHARIF)
-
-        val accountValue = LiveDataTestUtil.getValue(account)
-
-        println(accountValue)
-        println(account)
-    }
-
-    @Test
-    fun addMoneyTest(){
-       // homeViewModel.saveAccount()
-       /// homeViewModel.addMoney()
+        val result = account.getOrAwaitValue()
     }
 
 }
