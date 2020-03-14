@@ -11,4 +11,7 @@ interface AccountRepository {
     suspend fun getFrequentContacts(): Result<List<Account>>
     suspend fun getContacts(): Result<List<Account>>
     suspend fun sendMoney(transaction: Transaction): Result<Transaction>
+    suspend fun saveAccount(account: Account)
+    suspend fun saveTransaction(transaction: Transaction)
+    suspend fun saveTransactions(transactions: List<Transaction>)
 }

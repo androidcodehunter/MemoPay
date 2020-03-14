@@ -13,7 +13,6 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.memo.pay.R
-import com.memo.pay.data.FakeAndroidTestAccountRepository
 import com.memo.pay.data.source.AccountRepository
 import com.memo.pay.ui.interfaces.OnToolbarChangeListener
 import kotlinx.coroutines.runBlocking
@@ -28,12 +27,8 @@ import org.mockito.Mockito.verify
 @MediumTest
 class HomeFragmentTest{
 
-    private lateinit var repository: AccountRepository
-
     @Before
-    fun initRepository(){
-        repository = FakeAndroidTestAccountRepository()
-    }
+    fun initRepository(){}
 
     @Test
     fun homeActivity_DisplayMemoPayBalanceInUi() = runBlocking{
@@ -56,7 +51,7 @@ class HomeFragmentTest{
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         // onView(withId(R.id.tvAccountBalance)).check(matches(withText("AED 1500.00")))
         //Sleeping the fragment few seconds to see the ui visible.
-        Thread.sleep(2000)
+        ///Thread.sleep(2000)
     }
 
     @Test
