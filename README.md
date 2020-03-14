@@ -16,7 +16,7 @@ Some basic unit & instrumentation test is performed to check the functionality t
 
 <h1>Local Cache/Database:</h1><br>
 Two table is used to store account and transaction related information which is 
-
+<br>
 <b>class Account(@PrimaryKey accountNumber, name, balance, currency, isFavorite, isOnline, profilePic)</b>
 
 <b>Transaction(@PrimaryKey id, name, type, transactionAmount, currency, profileUrl, date, senderAccountNumber, receiverAccountNumber)</b>
