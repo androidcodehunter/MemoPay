@@ -19,7 +19,7 @@ import java.util.*
 import kotlin.collections.LinkedHashMap
 
 /*TODO fake api calling delay time in millis. */
-private const val SERVICE_LATENCY_IN_MILLIS = 150L
+private const val SERVICE_LATENCY_IN_MILLIS = 15000L
 /*TODO AccountRemoteDataSource which acts as a backend api to simulate all kinds of account, transaction related data response. */
 class AccountRemoteDataSource(private val appDatabase: AppDatabase,
                               private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO): AccountDataSource {
