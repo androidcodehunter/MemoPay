@@ -6,7 +6,7 @@ import com.memo.pay.data.db.table.Transaction
 
 class FakeAccountRepository: AccountRepository {
 
-    /*TODO change this variable to check error cases for fake repository. */
+    /*TODO change this variable to check error cases for fake repository or you can set the value from caller function. */
     private var shouldReturnError = false
 
     private var TRANSACTIONS_SERVICE_DATA: LinkedHashMap<Int, Transaction> = LinkedHashMap()
